@@ -607,6 +607,7 @@ void Check_For_End(Gamestate &Game) {
 	else if (Game.Turn_Counter == Game.span * Game.span) {
 		Game.Winner = 3;
 		cout << "Remis!" << endl;
+		return;
 	}
 
 }
