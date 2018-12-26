@@ -1,0 +1,4 @@
+﻿  Game.cpp
+c:\users\darek\desktop\kółko_i_krzyżyk\tictactoe\tictactoe\game.cpp(42): warning C4715: "find”: niewszystkie ścieżki kodu zwracają wartość
+c:\users\darek\desktop\kółko_i_krzyżyk\tictactoe\tictactoe\game.cpp(83): warning C4715: "addToTree”: niewszystkie ścieżki kodu zwracają wartość
+  TicTacToe.vcxproj -> C:\Users\Darek\Desktop\Kółko_i_Krzyżyk\TicTacToe\Debug\TicTacToe.exe
