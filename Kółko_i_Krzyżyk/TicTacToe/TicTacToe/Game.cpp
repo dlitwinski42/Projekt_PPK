@@ -468,9 +468,8 @@ Gamestate CPU_Turn(Gamestate &Game) {
 			Game.Tree_root_5 = addToTree(Game.Tree_root_3, Game);
 		}
 	}
-	//chosen_field = scoreCheck(Game);
-	//cout << "Odwolanie do scoreCheck" << endl;
-	cin >> chosen_field;
+	chosen_field = scoreCheck(Game);
+	cout << "Odwolanie do scoreCheck" << endl;
 	if (chosen_field == 0) {
 		do {
 
