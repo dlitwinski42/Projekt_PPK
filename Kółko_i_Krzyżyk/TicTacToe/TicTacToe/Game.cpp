@@ -1,10 +1,10 @@
 ﻿#include <iostream>
 #include <iomanip>
 #include <string>
-#include <cctype>
 #include <ctime>
 #include <fstream>
 #include "Game.h"
+
 using namespace std;
 
 int compareBoards(Gamestate Game, int *board) {
@@ -19,24 +19,53 @@ int compareBoards(Gamestate Game, int *board) {
 	return 0;
 }
 
+listOfRoots* findRoot(listOfRoots* header, int span) {
+	if (header == nullptr) {
+		cout << "Nie znaleziono korzenia drzewa" << endl;
+		return nullptr;
+	}
+	else {
+		if (header->span == span) {
+			return header;
+		}
+		else {
+			findRoot(header->pNext, span);
+		}
+	}
+}
+
+listOfRoots* addRoot(listOfRoots* header, int span) {
+		listOfRoots* new_node = new listOfRoots;
+		cout << "stworzono nowy element listy" << endl;
+		new_node->pNext = header;
+		new_node->span = span;
+		new_node->root = nullptr;
+		header = new_node;
+		return new_node;
+}
+void deleteList(listOfRoots* header) {
+	if (header->pNext != nullptr) {
+		deleteList(header->pNext);
+	}
+	else {
+		delete header;
+	}
+}
 boardTree* find(boardTree * root, Gamestate Game) {
 	boardTree* work_root = root;
 	if (root == nullptr) {
-		return 0;
+		return 0; //Nie znaleziono wezla
 	}
 	if (root != nullptr) {
 		int compared = compareBoards(Game, work_root->AI);
 		if (compared < 0) {
-			//	cout << "Szukaj w lewo" << endl;
-			return find(work_root->left, Game);
+			return find(work_root->left, Game); //Szukaj w lewo
 		}
 		else if (compared > 0) {
-			//	cout << "Szukaj w prawo" << endl;
-			return find(work_root->right, Game);
+			return find(work_root->right, Game); //Szukaj w prawo
 		}
 		else {
-			//	cout << "Znaleziono" << endl;
-			return root;
+			return root; //Znaleziono
 		}
 	}
 }
@@ -58,57 +87,23 @@ boardTree* addToTree(boardTree* root, Gamestate Game) {
 	else {
 		if (compareBoards(Game, root->AI) < 0) {
 			if (root->left == nullptr) {
-				//	cout << "Dodaj w lewo" << endl;
-				root->left = addToTree(root->left, Game);
+				root->left = addToTree(root->left, Game); //Dodaj w lewo
 			}
 			else {
-				//	cout << "Przejdz w lewo" << endl;
-				addToTree(root->left, Game);
+				addToTree(root->left, Game); //Przejdz w lewo
 			}
 		}
 		else if (compareBoards(Game, root->AI) > 0) {
 			if (root->right == nullptr) {
-				//	cout << "Dodaj w prawo" << endl;
-				root->right = addToTree(root->right, Game);
+				root->right = addToTree(root->right, Game); //Dodaj w prawo
 			}
 			else {
-				//	cout << "Przejdz w prawo" << endl;
-				addToTree(root->right, Game);
+				addToTree(root->right, Game); //Przejdz w prawo
 			}
 		}
 		else {
 			return root;
 		}
-	}
-}
-void maziaj_tablice(int *T) {
-	for (int i = 0; i < 25; i++) {
-		cout << T[i] << " ";
-	}
-}
-void preOrder(boardTree* root) {
-	if (root == nullptr) {
-		cout << "Drzewo nie istnieje!" << endl;
-	}
-	else {
-		maziaj_tablice(root->AI);
-		cout << ":" << root->score << endl;
-		/*if (root->left != nullptr) {
-			cout << "1";
-		}
-		else {
-			cout << "0";
-		}
-		if (root->right != nullptr) {
-			cout << "1";
-		}
-		else {
-			cout << "0";
-		}*/
-		if (root->left != nullptr)
-			preOrder(root->left);
-		if (root->right != nullptr)
-			preOrder(root->right);
 	}
 }
 void deleteTree(boardTree* root) {
@@ -122,108 +117,105 @@ void deleteTree(boardTree* root) {
 		root = nullptr;
 	}
 }
-void Maziaj_AI(Gamestate Game) {
-	for (int i = 0; i < (Game.span * Game.span); i++) {
-		cout << Game.AI[i] << " ";
-	}
-	cout << endl;
-}
-void Maziaj_moves(Gamestate Game) {
-	for (int i = 0; i < (Game.span * Game.span); i++) {
-		cout << Game.moves[i] << " ";
-	}
-	cout << endl;
-}
-void write_file_3(boardTree* root, ofstream &f) {
-	if (f.is_open()) {
+
+void writeFile(boardTree* root, int span, ofstream &fo) {
+	if (fo.is_open()) {
 		if (root == nullptr) {
 			cout << "Drzewo nie istnieje!" << endl;
 		}
 		for (int i = 0; i < 9; i++) {
 			int tab = root->AI[i];
-			f << tab << " ";
+			fo << tab << " ";
 		}
-		f << root->score << " ";
+		fo << root->score << " ";
 		if (root->left != nullptr)
-			write_file_3(root->left, f);
+			writeFile(root->left, span, fo);
 		if (root->right != nullptr)
-			write_file_3(root->right, f);
+			writeFile(root->right, span, fo);
 
 	}
 }
-boardTree* read_file_3(boardTree* root, Gamestate Game, ifstream &f) {
-	bool root_exist = 0;
-	if (f.is_open()) {
-		while (!f.eof()) {
-			for (int i = 0; i < (Game.span*Game.span); i++) {
-				f >> Game.AI[i];
-			}
-			if (!root_exist) {
-				root = addToTree(root, Game);
-				root_exist = 1;
-			}
-			else {
-				addToTree(root, Game);
-			}
-			boardTree* work_node = find(root, Game);
-			f >> work_node->score;
 
+boardTree* readFile(Gamestate &Game, ifstream &f) {
+	if (findRoot(Game.list_header, Game.span) == nullptr) {  
+		Game.list_header = addRoot(Game.list_header, Game.span);
+		Game.current_root = (findRoot(Game.list_header, Game.span))->root;
+		if (f.is_open()) {
+			while (!f.eof()) {
+				for (int i = 0; i < (Game.span*Game.span); i++) {
+					f >> Game.AI[i];
+					if (Game.AI[i] > 1 || Game.AI[i] < -1) {
+						cout << "Nieprawidlowe dane w pliku" << endl;
+						return nullptr;
+					}
+				}
+				if (Game.current_root == nullptr) {
+				Game.current_root =	addToTree(Game.current_root, Game);
+				}
+				else {
+				addToTree(Game.current_root, Game);
+				}
+				boardTree* work_node = find(Game.current_root, Game);
+				f >> work_node->score;
+
+			}
 		}
+		else {
+			cout << "Nie znaleziono pliku z danymi drzewa" << endl;
+		}
+		for (int i = 0; i < (Game.span * Game.span); ++i) {
+			Game.AI[i] = 0;
+		}
+		return Game.current_root;
 	}
-	for (int i = 0; i < (Game.span * Game.span); ++i) {
-		Game.AI[i] = 0;
+	else {
+		if (f.is_open()) {
+			while (!f.eof()) {
+				for (int i = 0; i < (Game.span*Game.span); i++) {
+					f >> Game.AI[i];
+					if (Game.AI[i] > 1 || Game.AI[i] < -1) {
+						cout << "Nieprawidlowe dane w pliku" << endl;
+						return nullptr;
+					}
+				}
+				addToTree(Game.current_root, Game);
+				boardTree* work_node = find(Game.current_root, Game);
+				f >> work_node->score;
+
+			}
+		}
+		else {
+			cout << "Nie znaleziono pliku z danymi drzewa" << endl;
+		}
+		for (int i = 0; i < (Game.span * Game.span); ++i) {
+			Game.AI[i] = 0;
+		}
+		return Game.current_root;
 	}
-	//preOrder(root);
-	return root;
+
 }
-void write_file_5(boardTree* root, ofstream &f) {
-	if (f.is_open()) {
-		if (root == nullptr) {
-			cout << "Drzewo nie istnieje!" << endl;
-		}
-		for (int i = 0; i < 25; i++) {
-			int tab = root->AI[i];
-			f << tab << " ";
-		}
-		f << root->score << " ";
-		if (root->left != nullptr)
-			write_file_5(root->left, f);
-		if (root->right != nullptr)
-			write_file_5(root->right, f);
-
-	}
-}
-boardTree* read_file_5(boardTree* root, Gamestate Game, ifstream &f) {
-	bool root_exist = 0;
-	if (f.is_open()) {
-		while (!f.eof()) {
-			for (int i = 0; i < (Game.span*Game.span); i++) {
-				f >> Game.AI[i];
-			}
-			if (!root_exist) {
-				root = addToTree(root, Game);
-				root_exist = 1;
-			}
-			else {
-				addToTree(root, Game);
-			}
-			boardTree* work_node = find(root, Game);
-			f >> work_node->score;
-
+void checkIfLoaded(Gamestate &Game) {
+	if (findRoot(Game.list_header, Game.span) == nullptr) {  
+		Game.list_header = addRoot(Game.list_header, Game.span);
+		Game.current_root = (findRoot(Game.list_header, Game.span))->root;
+		if (Game.current_root == nullptr) {
+			Game.current_root = addToTree(Game.current_root, Game);
 		}
 	}
-	for (int i = 0; i < (Game.span * Game.span); ++i) {
-		Game.AI[i] = 0;
+	else {
+		if (Game.current_root == nullptr) {
+			Game.current_root = addToTree(Game.current_root, Game);
+		}
 	}
-	//preOrder(root);
-	return root;
 }
 int scoreCheck(Gamestate Game) {
 	int* available_moves = new int[(Game.span*Game.span) - Game.Turn_Counter];
 	int j = 0;
 	int best_score;
+	int conf_resolve;
 	bool best_init = false;
 	int preferred_move = 0;
+	int donor_count = 0;
 	boardTree* score_donor = nullptr;
 	for (int i = 0; i < (Game.span * Game.span); i++) {
 
@@ -234,19 +226,30 @@ int scoreCheck(Gamestate Game) {
 	}
 	for (int i = 0; i < j; i++) {
 		Game.AI[(available_moves[i] - 1)] = 1;
-		if (Game.span == 3) {
-			score_donor = find(Game.Tree_root_3, Game);
-		}
-		else {
-			score_donor = find(Game.Tree_root_5, Game);
-		}
+		score_donor = find(Game.current_root, Game);
 		if (score_donor == nullptr) {
+			if (!best_init) {
+				best_score = 0;
+				preferred_move = i;
+				best_init = true;
+			}
+			else if (best_score < 0) {
+				best_score = 0;
+				preferred_move = i;
+			}
+			else if (best_score == 0) {
+				conf_resolve = rand() % 2;
+				if (conf_resolve == 0) {
+
+				}
+				else {
+					best_score = 0;
+					preferred_move = i;
+				}
+			}
 		}
 		else {
-			if (score_donor->score < 0) {
-
-			}
-			else if (!best_init) {
+			if (!best_init) {
 				best_score = score_donor->score;
 				preferred_move = i;
 				best_init = true;
@@ -256,7 +259,7 @@ int scoreCheck(Gamestate Game) {
 				preferred_move = i;
 			}
 			else if (score_donor->score == best_score) {
-				int conf_resolve = rand() % 2;
+				conf_resolve = rand() % 2;
 				if (conf_resolve == 0) {
 
 				}
@@ -268,103 +271,52 @@ int scoreCheck(Gamestate Game) {
 		}
 		Game.AI[(available_moves[i] - 1)] = 0;
 	}
-	if (preferred_move != 0) {
 		preferred_move = available_moves[preferred_move];
-		cout << "Chosen:" << preferred_move << endl;
+		delete[] available_moves;
 		return preferred_move;
-	}
-	else {
-		cout << "Chosen: 0" << endl;
-		return 0;
-	}
 }
 void scoreUpdate(Gamestate &Game) {
 	if (Game.Winner == 1) {   //Zły rezultat
 		boardTree* Updated_Node = nullptr;
-		if (Game.span == 3) {
-			Updated_Node = find(Game.Tree_root_3, Game);
-		}
-		else {
-			Updated_Node = find(Game.Tree_root_5, Game);
-		}
+		Updated_Node = find(Game.current_root, Game);
 		Updated_Node->score -= 1;
 		for (int i = 0; i < Game.Turn_Counter; i++) {
 			Game.AI[(Game.moves[((Game.Turn_Counter) - i) - 1]) - 1] = 0;
-			cout << Game.moves[((Game.Turn_Counter) - i) - 1] << endl;
-			Maziaj_AI(Game);
-			boardTree* Updated_Node = nullptr;
-			if (Game.span == 3) {
-				Updated_Node = find(Game.Tree_root_3, Game);
+			if (i == 0) {
+				Updated_Node = find(Game.current_root, Game);
+				Updated_Node->score -= 1;
 			}
-			else {
-				Updated_Node = find(Game.Tree_root_5, Game);
-			}
-			Updated_Node->score -= 1;
 		}
 
 	}
 	else if (Game.Winner == 3) { //Dobry rezultat (Komputer zremisował)
 		boardTree* Updated_Node = nullptr;
-		if (Game.span == 3) {
-			Updated_Node = find(Game.Tree_root_3, Game);
-		}
-		else {
-			Updated_Node = find(Game.Tree_root_5, Game);
-		}
+		Updated_Node = find(Game.current_root, Game);
 		Updated_Node->score += 1;
 		for (int i = 0; i < Game.Turn_Counter; i++) {
 			Game.AI[(Game.moves[((Game.Turn_Counter) - i) - 1]) - 1] = 0;
-			cout << Game.moves[((Game.Turn_Counter) - i) - 1] << endl;
-			Maziaj_AI(Game);
-			boardTree* Updated_Node = nullptr;
-			if (Game.span == 3) {
-				Updated_Node = find(Game.Tree_root_3, Game);
-			}
-			else {
-				Updated_Node = find(Game.Tree_root_5, Game);
-			}
+			Updated_Node = find(Game.current_root, Game);
 			Updated_Node->score += 1;
 		}
 
 	}
 	else if (Game.Winner == 2) { //Najlepszy rezultat (Komputer wygrał)
 		boardTree* Updated_Node = nullptr;
-		if (Game.span == 3) {
-			Updated_Node = find(Game.Tree_root_3, Game);
-		}
-		else {
-			Updated_Node = find(Game.Tree_root_5, Game);
-		}
+		Updated_Node = find(Game.current_root, Game);
 		Updated_Node->score += 3;
 		for (int i = 0; i < Game.Turn_Counter; i++) {
 			Game.AI[(Game.moves[((Game.Turn_Counter) - i) - 1]) - 1] = 0;
-			cout << Game.moves[((Game.Turn_Counter) - i) - 1] << endl;
-			Maziaj_AI(Game);
-			boardTree* Updated_Node = nullptr;
-			if (Game.span == 3) {
-				Updated_Node = find(Game.Tree_root_3, Game);
-			}
-			else {
-				Updated_Node = find(Game.Tree_root_5, Game);
-			}
+			Updated_Node = find(Game.current_root, Game);
 			Updated_Node->score += 3;
 		}
 
 	}
 }
 
-Gamestate Initialize_Gamestate(Gamestate &Game) {
+void initializeGamestate(Gamestate &Game) {
 	string input_span;
-	Game.span = -1;
 	Game.Winner = 0;
 	Game.Turn_Counter = 0;
-	cout << "Wybierz wielkosc planszy: 3x3[3] lub 5x5[5]" << endl;
-	do {
-		cin >> input_span;
-		if (input_span.size() == 1 && isdigit(input_span[0])) {
-			Game.span = stoi(input_span);
-		}
-	} while (Game.span != 3 && Game.span != 5);
 	char znak;
 	cout << "Wybierz swoj znak [x lub o]" << endl;
 	do {
@@ -397,57 +349,34 @@ Gamestate Initialize_Gamestate(Gamestate &Game) {
 		Game.moves[i] = 0;
 	}
 	Game.initialized = true;
-	return Game;
 }
-Gamestate Player_Turn(Gamestate &Game) {
+Gamestate playerTurn(Gamestate &Game) {
 	int chosen_field = -1;
-	int i, j;
-	string field_input;
-	if (Game.span == 3) {
-		if (!(find(Game.Tree_root_3, Game))) {
-			Game.Tree_root_3 = addToTree(Game.Tree_root_3, Game);
-		}
-	}
-	else {
-		if (!(find(Game.Tree_root_5, Game))) {
-			Game.Tree_root_5 = addToTree(Game.Tree_root_5, Game);
-		}
-	}
+	int a, b, i, j;
+	char* input;
 	do {
 		do {
-			cin >> field_input;
-			if (field_input.size() == 2) {
-				if (isdigit(field_input[0]) && isdigit(field_input[1])) {
-					chosen_field = stoi(field_input);
-				}
-				else cout << "Wprowadz liczbe" << endl;
+			input = new char[3];
+			cin.getline(input, 3);
+			a = input[0] - 48;
+			b = input[1] - 48;
+			if ((b == -48) && (a > 0 && a < 9)) {
+				chosen_field = a;
 			}
-			else if (field_input.size() == 1) {
-				if (isdigit(field_input[0])) {
-					chosen_field = stoi(field_input);
-				}
-				else cout << "Wprowadz liczbe" << endl;
+			else if ((b > 0 && b < 9) && (a > 0 && a < 9)) {
+				chosen_field = (a * 10) + b;
 			}
-			else cout << "Wprowadz liczbe mniejszą od 99" << endl;
+			delete[] input;
 		} while (!(((Game.span*Game.span) >= chosen_field) && (chosen_field > 0)));
 		i = (chosen_field - 1) / Game.span;
 		j = (chosen_field + (Game.span - 1)) % Game.span;
 		if (Game.T[i][j] == none) {
 			Game.T[i][j] = Game.Player;
 			Game.AI[(chosen_field - 1)] = -1;
-			Maziaj_AI(Game);
-			if (Game.span == 3) {
-				if (find(Game.Tree_root_3, Game) == nullptr) {
-					addToTree(Game.Tree_root_3, Game);
-				}
-			}
-			else {
-				if (find(Game.Tree_root_5, Game) == nullptr) {
-					addToTree(Game.Tree_root_5, Game);
-				}
+			if (find(Game.current_root, Game) == nullptr) {
+				addToTree(Game.current_root, Game);
 			}
 			Game.moves[Game.Turn_Counter] = chosen_field;
-			Maziaj_moves(Game);
 			Game.Turn_Counter++;
 			break;
 		}
@@ -456,23 +385,11 @@ Gamestate Player_Turn(Gamestate &Game) {
 	return Game;
 }
 
-Gamestate CPU_Turn(Gamestate &Game) {
+Gamestate CPUTurn(Gamestate &Game) {
 	int chosen_field, i, j;
-	if (Game.span == 3) {
-		if (!(find(Game.Tree_root_3, Game))) {
-			Game.Tree_root_3 = addToTree(Game.Tree_root_3, Game);
-		}
-	}
-	else {
-		if (!(find(Game.Tree_root_5, Game))) {
-			Game.Tree_root_5 = addToTree(Game.Tree_root_3, Game);
-		}
-	}
 	chosen_field = scoreCheck(Game);
-	cout << "Odwolanie do scoreCheck" << endl;
 	if (chosen_field == 0) {
 		do {
-
 			chosen_field = rand() % (Game.span*Game.span) + 1;
 			cout << "Wylosowano pole nr:" << chosen_field << endl;
 			i = (chosen_field - 1) / Game.span;
@@ -489,23 +406,15 @@ Gamestate CPU_Turn(Gamestate &Game) {
 	}
 	Game.T[i][j] = Game.CPU;
 	Game.AI[(chosen_field - 1)] = 1;
-	Maziaj_AI(Game);
-	if (Game.span == 3) {
-		if (find(Game.Tree_root_3, Game) == nullptr) {
-			addToTree(Game.Tree_root_3, Game);
-		}
-	}
-	else {
-		if (find(Game.Tree_root_5, Game) == nullptr) {
-			addToTree(Game.Tree_root_5, Game);
-		}
+	if (find(Game.current_root, Game) == nullptr) {
+		addToTree(Game.current_root, Game);
 	}
 	Game.moves[Game.Turn_Counter] = chosen_field;
 	Game.Turn_Counter++;
 	return Game;
 }
 
-bool Check_for_Win(Gamestate &Game) {
+bool checkForWin(Gamestate &Game) {
 	bool Win = false;
 	for (int i = 0; i < Game.span; i++) {
 		for (int j = 1; j < Game.span; j++) {
@@ -597,11 +506,11 @@ bool Check_for_Win(Gamestate &Game) {
 	}
 	return Win;
 }
-void Check_For_End(Gamestate &Game) {
+void checkForEnd(Gamestate &Game) {
 	if (Game.Turn_Counter < Game.span) {
 		return;
 	}
-	else if (Check_for_Win(Game)) {
+	else if (checkForWin(Game)) {
 		return;
 	}
 	else if (Game.Turn_Counter == Game.span * Game.span) {
@@ -611,10 +520,10 @@ void Check_For_End(Gamestate &Game) {
 	}
 
 }
-void Draw_Board(Gamestate &Game) {
+void drawBoard(Gamestate &Game) {
 	int field_nr = 0;
 	if (Game.initialized == false) {
-		Initialize_Gamestate(Game);
+		initializeGamestate(Game);
 	}
 	cout << (char)(lewy_gorny); //╔
 	for (int i = 0; i < (Game.span - 1); ++i) {
@@ -659,57 +568,37 @@ void Draw_Board(Gamestate &Game) {
 	}
 	cout << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(prawy_dolny) << endl;
 }
-Gamestate Single_Game(Gamestate &Game) {
-	Draw_Board(Game);
-	if (Game.span == 3) {
-		ifstream fi;
-		fi.open("3x3");
-		Game.Tree_root_3 = read_file_3(Game.Tree_root_3, Game, fi);
-	}
-	else {
-		ifstream fi;
-		fi.open("5x5");
-		Game.Tree_root_5 = read_file_5(Game.Tree_root_5, Game, fi);
-	}
+Gamestate singleGame(Gamestate &Game) {
+	drawBoard(Game);
+	ifstream fi;
+	fi.open(to_string(Game.span));
+	Game.current_root = readFile(Game, fi);
+	checkIfLoaded(Game);
 	Game.Who_First = rand() % 2;
 	if (Game.Who_First == 0) {
-		cout << "Gre rozpoczyna Gracz";
+		cout << "Gre rozpoczyna Gracz" << endl;
 		do {
-			Player_Turn(Game);
-			Draw_Board(Game);
-			Check_For_End(Game);
-			//preOrder(Game.Tree_root_5);
+			playerTurn(Game);
+			drawBoard(Game);
+			checkForEnd(Game);
 			if (Game.Winner != 0) {
 				scoreUpdate(Game);
-				if (Game.span == 3) {
-					ofstream fo;
-					fo.open("3x3");
-					write_file_3(Game.Tree_root_3, fo);
-				}
-				else {
-					ofstream fo;
-					fo.open("5x5");
-					write_file_5(Game.Tree_root_5, fo);
-				}
+				ofstream fo;
+				fo.open(to_string(Game.span));
+				writeFile(Game.current_root, Game.span, fo);
+				scoreUpdate(Game);
 				Game.initialized = false;
 				break;
 			}
-			CPU_Turn(Game);
-			Draw_Board(Game);
-			Check_For_End(Game);
-			//preOrder(Game.Tree_root_5);
+			CPUTurn(Game);
+			drawBoard(Game);
+			checkForEnd(Game);
 			if (Game.Winner != 0) {
 				scoreUpdate(Game);
-				if (Game.span == 3) {
-					ofstream fo;
-					fo.open("3x3");
-					write_file_3(Game.Tree_root_3, fo);
-				}
-				else {
-					ofstream fo;
-					fo.open("5x5");
-					write_file_5(Game.Tree_root_5, fo);
-				}
+				ofstream fo;
+				fo.open(to_string(Game.span));
+				writeFile(Game.current_root, Game.span, fo);
+				scoreUpdate(Game);
 				Game.initialized = false;
 				break;
 			}
@@ -717,44 +606,27 @@ Gamestate Single_Game(Gamestate &Game) {
 		return Game;
 	}
 	else {
-		cout << "Gre rozpoczyna Komputer";
+		cout << "Gre rozpoczyna Komputer" << endl;
 		do {
-			CPU_Turn(Game);
-			//preOrder(Game.Tree_root_5);
-			Draw_Board(Game);
-			Check_For_End(Game);
-			//preOrder(Game.Tree_root_5);
+			CPUTurn(Game);
+			drawBoard(Game);
+			checkForEnd(Game);
 			if (Game.Winner != 0) {
-				if (Game.span == 3) {
-					ofstream fo;
-					fo.open("3x3");
-					write_file_3(Game.Tree_root_3, fo);
-				}
-				else {
-					ofstream fo;
-					fo.open("5x5");
-					write_file_5(Game.Tree_root_5, fo);
-				}
+				ofstream fo;
+				fo.open(to_string(Game.span));
+				writeFile(Game.current_root, Game.span, fo);
 				scoreUpdate(Game);
 				Game.initialized = false;
 				break;
 			}
-			Player_Turn(Game);
-			//preOrder(Game.Tree_root_5);
-			Draw_Board(Game);
-			Check_For_End(Game);
+			playerTurn(Game);
+			drawBoard(Game);
+			checkForEnd(Game);
 			if (Game.Winner != 0) {
 				scoreUpdate(Game);
-				if (Game.span == 3) {
-					ofstream fo;
-					fo.open("3x3");
-					write_file_3(Game.Tree_root_3, fo);
-				}
-				else {
-					ofstream fo;
-					fo.open("5x5");
-					write_file_5(Game.Tree_root_5, fo);
-				}
+				ofstream fo;
+				fo.open(to_string(Game.span));
+				writeFile(Game.current_root, Game.span, fo);
 				Game.initialized = false;
 				break;
 			}
@@ -762,7 +634,7 @@ Gamestate Single_Game(Gamestate &Game) {
 		return Game;
 	}
 }
-void Session_Summary(Gamestate &Game) {
+void sessionSummary(Gamestate &Game) {
 	cout << "Podsumowanie:" << endl;
 	cout << "Gracz wygral " << Game.Player_Wins << " razy" << endl;
 	cout << "Komputer wygral " << Game.CPU_Wins << " razy" << endl;
@@ -776,8 +648,8 @@ void Session_Summary(Gamestate &Game) {
 	delete[] Game.AI;
 	cout << "Usuwam tablice zapisujaca wykonane ruchy" << endl;
 	delete[] Game.moves;
-	cout << "Usuwam drzewo 3x3" << endl;
-	deleteTree(Game.Tree_root_3);
-	cout << "Usuwam drzewo 5x5" << endl;
-	deleteTree(Game.Tree_root_5);
+	cout << "Usuwam obecnie uzywane drzewo" << endl;
+	deleteTree(Game.current_root);
+	cout << "Usuwam liste przechowujaca korzenie drzew" << endl;
+	deleteList(Game.list_header);
 }

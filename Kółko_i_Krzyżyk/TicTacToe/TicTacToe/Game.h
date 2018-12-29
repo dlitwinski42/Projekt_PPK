@@ -19,14 +19,22 @@ enum znaki {
 	circle = 'o',
 	none = 0
 };
-/** Wêze³ drzewa binarnego plansz */
+/** Wezel drzewa binarnego plansz */
 struct boardTree {
 	boardTree *left;
 	int *AI; //Player jako -1, komputer jako 1
 	boardTree *right;
 	int score = 0;
 };
-/** Struktura, w której przechowywane s¹ informacje dotycz¹ce obecnego stanu gry*/
+
+/**Lista zawierajaca korzenie drzew dla danych wielkosci plansz*/
+struct listOfRoots {
+	int span;
+	boardTree* root;
+	listOfRoots* pNext;
+};
+
+/** Struktura, w ktorej przechowywane ss informacje dotyczace obecnego stanu gry*/
 struct Gamestate {
 	char **T;
 	int *AI; 
@@ -41,8 +49,8 @@ struct Gamestate {
 	int CPU_Wins;
 	int Player_Wins;
 	char Rematch;
-	boardTree* Tree_root_3;
-	boardTree* Tree_root_5;
+	listOfRoots* list_header;
+	boardTree* current_root;
 };
 
 /** Funkcja porównuj¹ca dwie tablice stanów planszy.
@@ -51,6 +59,12 @@ struct Gamestate {
 @return wartoœæ -1,1,0 w zale¿noœci, czy tablica obecnego stanu gry mniejsza, wiêksza lub równa
 */
 int compareBoards(Gamestate Game, int *board);
+
+listOfRoots* findRoot(listOfRoots* header, int span);
+
+listOfRoots* addRoot(listOfRoots* header, int span);
+
+void deleteList(listOfRoots* header);
 
 /** Funkcja szukaj¹ca danego stanu planszy w drzewie binarnym, wykorzystuj¹ca funkcje compareBoards
 @param root Korzeñ drzewa, z którego gra korzysta
@@ -66,53 +80,20 @@ boardTree* find(boardTree * root, Gamestate Game);
 */
 boardTree* addToTree(boardTree* root, Gamestate Game);
 
-/** Funkcja wypisuj¹ca dan¹ tablice
-@param T wskaŸnik na tablice, któr¹ funkcja ma wypisac
-*/
-void maziaj_tablice(int *T);
 
-/** Funkcja wypisuj¹ca drzewo binarne w kolejnoœci najpierw na korzeniu, potem na nastêpnikach
-@param T wskaŸnik na tablice, któr¹ funkcja ma wypisac
-*/
-void preOrder(boardTree* root);
-
-/** Funkcja wypisuj¹ca tablice AI w danym momencie
-@param Game Struktura gry, z której funkcja pobiera tablice AI
-*/
-void Maziaj_AI(Gamestate Game);
-
-/** Funkcja wypisuj¹ca tablicê przechowuj¹c¹ wykonane ruchy w kolejnoœci ich wykonania
-@param Game Struktura gry, z której funkcja pobiera tablice moves
-*/
-void Maziaj_moves(Gamestate Game);
-
-/** Funkcja zapisuj¹ca drzewo binarne gry 3x3 do pliku
-@param root Korzen zapisywanego drzewa
-@param f Strumien wyjsciowy, za pomoca ktorego zapisujemy
-*/
-void write_file_3(boardTree* root, ofstream &f);
-
-/** Funkcja sczytuj¹ca drzewo binarne gry 3x3 z pliku
+/** Funkcja sczytuj¹ca drzewo binarne gry z odpowiedniego pliku
 @param root wskaŸnik, do którego funkcja ma do³¹czyæ sczytane drzewo
 @param Game Struktura gry, z której funkcja pobiera wielkoœæ planszy
 @param f Strumien wejsciowy, za pomoca ktorego odczytujemy
 @return wskaŸnik na pierwszy wêze³, który zosta³ do³¹czony
 */
-boardTree* read_file_3(boardTree* root, Gamestate Game, ifstream &f);
+boardTree* readFile(Gamestate &Game, ifstream &f);
 
-/** Funkcja zapisuj¹ca drzewo binarne gry 5x5 do pliku
+/** Funkcja zapisuj¹ca drzewo binarne gry do odpowiedniego pliku
 @param root Korzen zapisywanego drzewa
 @param f Strumien wyjsciowy, za pomoca ktorego zapisujemy
 */
-void write_file_5(boardTree* root, ofstream &f);
-
-/** Funkcja sczytuj¹ca drzewo binarne gry 3x3 z pliku
-@param root wskaŸnik, do którego funkcja ma do³¹czyæ sczytane drzewo
-@param Game Struktura gry, z której funkcja pobiera wielkoœæ planszy
-@param f Strumien wejsciowy, za pomoca ktorego odczytujemy
-@return wskaŸnik na pierwszy wêze³, który zosta³ do³¹czony
-*/
-boardTree* read_file_5(boardTree* root, Gamestate Game, ifstream &f);
+void writeFile(boardTree* root, int span, ofstream &f);
 
 /** Funkcja sprawdzaj¹ca wartoœæ mo¿liwych ruchów w danym momencie 
 @param Game Struktura gry, z której funkcja pobiera tablice AI
@@ -129,45 +110,45 @@ void scoreUpdate(Gamestate &Game);
 @param Game Niezainicjowana struktura gry
 @return Struktura gry gotowa na rozgrywkê
 */
-Gamestate Initialize_Gamestate(Gamestate &Game);
+void initializeGamestate(Gamestate &Game);
 
 /** Funkcja podczas której odbywa siê ruch gracza
 @param Game Struktura gry, do której zapisany bêdzie ruch gracza
 @return Struktura gry zaktualizowana o ruch gracza
 */
-Gamestate Player_Turn(Gamestate &Game);
+Gamestate playerTurn(Gamestate &Game);
 
 /** Funkcja podczas której odbywa siê ruch komputera
 @param Game Struktura gry, do której zapisany bêdzie ruch komputera
 @return Struktura gry zaktualizowana o ruch komputera
 */
-Gamestate CPU_Turn(Gamestate &Game);
+Gamestate CPUTurn(Gamestate &Game);
 
 /** Funkcja która sprawdza, czy gra powinna siê zakoñczyæ, jeœli tak, to ustawia zmienn¹ Winner w strukturze gry na odpowiedni¹ wartoœæ (3 dla remisu)
 @param Game Struktura gry, do której bêdzie zapisane to, czy gra powinna siê skoñczyæ
 */
-void Check_For_End(Gamestate &Game);
+void checkForEnd(Gamestate &Game);
 
 /** Funkcja która sprawdza, czy gra w danym momencie posiada zwyciêzce, jeœli tak, to ustawia zmienn¹ Winner w strukturze gry na odpowiedni¹ wartoœæ (1 dla Gracza, 2 dla Komputera)
 @param Game Struktura gry, do której bêdzie zapisane to, czy gra powinna siê skoñczyæ
 @return Zwraca true, jeœli gra ma zwyciêzce, false, jeœli nie
 */
-bool Check_for_Win(Gamestate &Game);
+bool checkForWin(Gamestate &Game);
 
 /** Funkcja która rysuje pole gry
 @param Game Struktura gry, z której funkcja bêdzie pobieraæ to jaki znak powinien siê pojawiæ na jakim polu
 */
-void Draw_Board(Gamestate &Game);
+void drawBoard(Gamestate &Game);
 
 /** Funkcja, w której zawarte s¹ wszystkie funkcje potrzebne do rozegrania pojedynczej gry
 @param Game Struktura gry, na której program operuje
 @return Funkcja zwraca strukturê gry w takim stanie, który pozwala na ponowne rozegranie gry
 */
-Gamestate Single_Game(Gamestate &Game);
+Gamestate singleGame(Gamestate &Game);
 
 /** Funkcja, która wypisuje statystyki gracza i komputera, oraz czyœci wszystko, co by³o dynamicznie zaalokowane
 @param Game Struktura gry, z której program uzyskuje dostêp do tablic i struktur do usuniêcia
 */
-void Session_Summary(Gamestate &Game);
+void sessionSummary(Gamestate &Game);
 
 #endif
