@@ -60,10 +60,23 @@ struct Gamestate {
 */
 int compareBoards(Gamestate Game, int *board);
 
+/** Funkcja znajdujaca korzen drzewa dla danej wielkosci planszy 
+@param header Pierwszy wezel listy korzeni drzewa
+@param span Dlugosc planszy
+@return Wskaznik na wezel listy zawierajacy wskaznik na odpowiedni korzen drzewa
+*/
 listOfRoots* findRoot(listOfRoots* header, int span);
 
+/** Funkcja dodajaca wezel zawierajacy korzen drzewa dla odpowiedniej wielkosci planszy
+@param header Pierwszy wezel listy korzeni drzewa
+@param span Dlugosc planszy
+@return Wskaznik na wezel listy zawierajacy wskaznik na odpowiedni korzen drzewa
+*/
 listOfRoots* addRoot(listOfRoots* header, int span);
 
+/** Funkcja usuwajaca liste zawierajaca korzenie drzewa
+@param header Pierwszy wezel listy korzeni drzewa
+*/
 void deleteList(listOfRoots* header);
 
 /** Funkcja szukaj¹ca danego stanu planszy w drzewie binarnym, wykorzystuj¹ca funkcje compareBoards
@@ -108,7 +121,6 @@ void scoreUpdate(Gamestate &Game);
 
 /** Funkcja inicjuj¹ca rozgrywkê, pyta gracza o parametry gry i tworzy potrzebne tablice
 @param Game Niezainicjowana struktura gry
-@return Struktura gry gotowa na rozgrywkê
 */
 void initializeGamestate(Gamestate &Game);
 

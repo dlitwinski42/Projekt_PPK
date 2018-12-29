@@ -106,13 +106,13 @@ Atrybuty publiczne</h2></td></tr>
 <tr class="separator:adaf20cbcde53c7cb9b5b68e1d635a8dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4c572e73a9d772b791a394e16c83e47"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGamestate.html#aa4c572e73a9d772b791a394e16c83e47">Rematch</a></td></tr>
 <tr class="separator:aa4c572e73a9d772b791a394e16c83e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e0409f77b0ee7499c285ca7fec69455"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGamestate.html#a7e0409f77b0ee7499c285ca7fec69455">Tree_root_3</a></td></tr>
-<tr class="separator:a7e0409f77b0ee7499c285ca7fec69455"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3dacabc8b6e5110d3ef1c7480a2b2f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGamestate.html#aa3dacabc8b6e5110d3ef1c7480a2b2f9">Tree_root_5</a></td></tr>
-<tr class="separator:aa3dacabc8b6e5110d3ef1c7480a2b2f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56c6d9ebf99eef81397ea0c093f8a632"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlistOfRoots.html">listOfRoots</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGamestate.html#a56c6d9ebf99eef81397ea0c093f8a632">list_header</a></td></tr>
+<tr class="separator:a56c6d9ebf99eef81397ea0c093f8a632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7ed11fd3b7dda0d684eb0e9e125ff5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGamestate.html#aa7ed11fd3b7dda0d684eb0e9e125ff5b">current_root</a></td></tr>
+<tr class="separator:aa7ed11fd3b7dda0d684eb0e9e125ff5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Opis szczeg√≥≈Çowy</h2>
-<div class="textblock"><p>Struktura, w ktÛrej przechowywane sπ informacje dotyczπce obecnego stanu gry </p>
+<div class="textblock"><p>Struktura, w ktorej przechowywane ss informacje dotyczace obecnego stanu gry </p>
 </div><h2 class="groupheader">Dokumentacja atrybut√≥w sk≈Çadowych</h2>
 <a id="a9c4da0c13f47435cacbf8d3a7758f921"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9c4da0c13f47435cacbf8d3a7758f921">&#9670;&nbsp;</a></span>AI</h2>
@@ -156,6 +156,20 @@ Atrybuty publiczne</h2></td></tr>
 
 </div>
 </div>
+<a id="aa7ed11fd3b7dda0d684eb0e9e125ff5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7ed11fd3b7dda0d684eb0e9e125ff5b">&#9670;&nbsp;</a></span>current_root</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structboardTree.html">boardTree</a>* Gamestate::current_root</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afe089798ca4d65d47cdf65cf070f43c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afe089798ca4d65d47cdf65cf070f43c6">&#9670;&nbsp;</a></span>initialized</h2>
 
@@ -164,6 +178,20 @@ Atrybuty publiczne</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">bool Gamestate::initialized = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a56c6d9ebf99eef81397ea0c093f8a632"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56c6d9ebf99eef81397ea0c093f8a632">&#9670;&nbsp;</a></span>list_header</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structlistOfRoots.html">listOfRoots</a>* Gamestate::list_header</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -248,34 +276,6 @@ Atrybuty publiczne</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">char** Gamestate::T</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7e0409f77b0ee7499c285ca7fec69455"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e0409f77b0ee7499c285ca7fec69455">&#9670;&nbsp;</a></span>Tree_root_3</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structboardTree.html">boardTree</a>* Gamestate::Tree_root_3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa3dacabc8b6e5110d3ef1c7480a2b2f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3dacabc8b6e5110d3ef1c7480a2b2f9">&#9670;&nbsp;</a></span>Tree_root_5</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structboardTree.html">boardTree</a>* Gamestate::Tree_root_5</td>
         </tr>
       </table>
 </div><div class="memdoc">

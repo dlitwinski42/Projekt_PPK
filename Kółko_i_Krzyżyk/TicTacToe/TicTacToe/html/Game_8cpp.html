@@ -70,7 +70,6 @@ $(function() {
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;iomanip&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
-<code>#include &lt;cctype&gt;</code><br />
 <code>#include &lt;ctime&gt;</code><br />
 <code>#include &lt;fstream&gt;</code><br />
 <code>#include &quot;<a class="el" href="Game_8h_source.html">Game.h</a>&quot;</code><br />
@@ -86,50 +85,82 @@ Wykres zaleÅ¼noÅ›ci zaÅ‚Ä…czania dla Game.cpp:</div>
 Funkcje</h2></td></tr>
 <tr class="memitem:a7c3ddd5eb6a712abc7323b7facf82374"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a7c3ddd5eb6a712abc7323b7facf82374">compareBoards</a> (<a class="el" href="structGamestate.html">Gamestate</a> Game, int *board)</td></tr>
 <tr class="separator:a7c3ddd5eb6a712abc7323b7facf82374"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade0ee50c741a30efb62ce183918da35f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlistOfRoots.html">listOfRoots</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#ade0ee50c741a30efb62ce183918da35f">findRoot</a> (<a class="el" href="structlistOfRoots.html">listOfRoots</a> *header, int span)</td></tr>
+<tr class="separator:ade0ee50c741a30efb62ce183918da35f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07afa979d17e9abbc7e4b40b3021a27e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlistOfRoots.html">listOfRoots</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a07afa979d17e9abbc7e4b40b3021a27e">addRoot</a> (<a class="el" href="structlistOfRoots.html">listOfRoots</a> *header, int span)</td></tr>
+<tr class="separator:a07afa979d17e9abbc7e4b40b3021a27e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e3381d127a66d41257161f449316e19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a3e3381d127a66d41257161f449316e19">deleteList</a> (<a class="el" href="structlistOfRoots.html">listOfRoots</a> *header)</td></tr>
+<tr class="separator:a3e3381d127a66d41257161f449316e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a237ee9325e982e5aaf3daffa296e0344"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a237ee9325e982e5aaf3daffa296e0344">find</a> (<a class="el" href="structboardTree.html">boardTree</a> *root, <a class="el" href="structGamestate.html">Gamestate</a> Game)</td></tr>
 <tr class="separator:a237ee9325e982e5aaf3daffa296e0344"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf7e2a3358cded005e3939b6750e392c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#abf7e2a3358cded005e3939b6750e392c">addToTree</a> (<a class="el" href="structboardTree.html">boardTree</a> *root, <a class="el" href="structGamestate.html">Gamestate</a> Game)</td></tr>
 <tr class="separator:abf7e2a3358cded005e3939b6750e392c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a567921534a33c76db31d671bf976c3ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a567921534a33c76db31d671bf976c3ac">maziaj_tablice</a> (int *T)</td></tr>
-<tr class="separator:a567921534a33c76db31d671bf976c3ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a491163ac1c3a0102fdb23244a1a7274e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a491163ac1c3a0102fdb23244a1a7274e">preOrder</a> (<a class="el" href="structboardTree.html">boardTree</a> *root)</td></tr>
-<tr class="separator:a491163ac1c3a0102fdb23244a1a7274e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a74ff6cddabd1ff347795d0b234a14d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a1a74ff6cddabd1ff347795d0b234a14d">deleteTree</a> (<a class="el" href="structboardTree.html">boardTree</a> *root)</td></tr>
 <tr class="separator:a1a74ff6cddabd1ff347795d0b234a14d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cc7d04d6326526b7fba087892724eab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a0cc7d04d6326526b7fba087892724eab">Maziaj_AI</a> (<a class="el" href="structGamestate.html">Gamestate</a> Game)</td></tr>
-<tr class="separator:a0cc7d04d6326526b7fba087892724eab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07a4dfcaa7862c7050240c2795c6d4d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a07a4dfcaa7862c7050240c2795c6d4d6">Maziaj_moves</a> (<a class="el" href="structGamestate.html">Gamestate</a> Game)</td></tr>
-<tr class="separator:a07a4dfcaa7862c7050240c2795c6d4d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45ff980dd465e04432bdfaed7e3be87b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a45ff980dd465e04432bdfaed7e3be87b">write_file_3</a> (<a class="el" href="structboardTree.html">boardTree</a> *root, ofstream &amp;f)</td></tr>
-<tr class="separator:a45ff980dd465e04432bdfaed7e3be87b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb36f9b9fedc756a16dc0eae6e1ea39b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#abb36f9b9fedc756a16dc0eae6e1ea39b">read_file_3</a> (<a class="el" href="structboardTree.html">boardTree</a> *root, <a class="el" href="structGamestate.html">Gamestate</a> Game, ifstream &amp;f)</td></tr>
-<tr class="separator:abb36f9b9fedc756a16dc0eae6e1ea39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b42d1b04bf6e89c00c535fcc29b0b9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a1b42d1b04bf6e89c00c535fcc29b0b9c">write_file_5</a> (<a class="el" href="structboardTree.html">boardTree</a> *root, ofstream &amp;f)</td></tr>
-<tr class="separator:a1b42d1b04bf6e89c00c535fcc29b0b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95342a2a26449be69fa7039fb9cda59c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a95342a2a26449be69fa7039fb9cda59c">read_file_5</a> (<a class="el" href="structboardTree.html">boardTree</a> *root, <a class="el" href="structGamestate.html">Gamestate</a> Game, ifstream &amp;f)</td></tr>
-<tr class="separator:a95342a2a26449be69fa7039fb9cda59c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f006e48755291490e5b9132155a84bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a8f006e48755291490e5b9132155a84bd">writeFile</a> (<a class="el" href="structboardTree.html">boardTree</a> *root, int span, ofstream &amp;fo)</td></tr>
+<tr class="separator:a8f006e48755291490e5b9132155a84bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb3587c525c258addca3a756be401476"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#afb3587c525c258addca3a756be401476">readFile</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game, ifstream &amp;f)</td></tr>
+<tr class="separator:afb3587c525c258addca3a756be401476"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2887b2601076414445beefe65b04f593"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a2887b2601076414445beefe65b04f593">checkIfLoaded</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
+<tr class="separator:a2887b2601076414445beefe65b04f593"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8d1acbac6fd39aad185728a21c69e43"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#af8d1acbac6fd39aad185728a21c69e43">scoreCheck</a> (<a class="el" href="structGamestate.html">Gamestate</a> Game)</td></tr>
 <tr class="separator:af8d1acbac6fd39aad185728a21c69e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c998ffcd4d7b21883bffb63385deabb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a2c998ffcd4d7b21883bffb63385deabb">scoreUpdate</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
 <tr class="separator:a2c998ffcd4d7b21883bffb63385deabb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b3af6b29453cc45cfa8b3be883b9659"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a9b3af6b29453cc45cfa8b3be883b9659">Initialize_Gamestate</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
-<tr class="separator:a9b3af6b29453cc45cfa8b3be883b9659"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0e6beef0ff91ec9882b570e32fd5c8d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#ad0e6beef0ff91ec9882b570e32fd5c8d">Player_Turn</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
-<tr class="separator:ad0e6beef0ff91ec9882b570e32fd5c8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0995179d182c9b34f0f641799cf6c8a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a0995179d182c9b34f0f641799cf6c8a3">CPU_Turn</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
-<tr class="separator:a0995179d182c9b34f0f641799cf6c8a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34426a1e871a22b205af2c17834dc9b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a34426a1e871a22b205af2c17834dc9b1">Check_for_Win</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
-<tr class="separator:a34426a1e871a22b205af2c17834dc9b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5496227439bac3b5f8bb96009532d6b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a5496227439bac3b5f8bb96009532d6b4">Check_For_End</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
-<tr class="separator:a5496227439bac3b5f8bb96009532d6b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a153b6de48077369f8574b21a1be79095"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a153b6de48077369f8574b21a1be79095">Draw_Board</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
-<tr class="separator:a153b6de48077369f8574b21a1be79095"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a15ea70a172904fe4b99e15005e27a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a6a15ea70a172904fe4b99e15005e27a5">Single_Game</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
-<tr class="separator:a6a15ea70a172904fe4b99e15005e27a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49295cf09fab2f97e2ebef05012bb29d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a49295cf09fab2f97e2ebef05012bb29d">Session_Summary</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
-<tr class="separator:a49295cf09fab2f97e2ebef05012bb29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44d1236ae068814479b458dafe416afb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a44d1236ae068814479b458dafe416afb">initializeGamestate</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
+<tr class="separator:a44d1236ae068814479b458dafe416afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a701f9eb36f715ec45239eef8016a681b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a701f9eb36f715ec45239eef8016a681b">playerTurn</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
+<tr class="separator:a701f9eb36f715ec45239eef8016a681b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeff9566aaa01cee6c9b12efebcc48c1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#aeff9566aaa01cee6c9b12efebcc48c1b">CPUTurn</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
+<tr class="separator:aeff9566aaa01cee6c9b12efebcc48c1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa888f859892afece2b177371f8c11828"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#aa888f859892afece2b177371f8c11828">checkForWin</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
+<tr class="separator:aa888f859892afece2b177371f8c11828"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c16b4171d5f778b52b1680e05f55e8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a3c16b4171d5f778b52b1680e05f55e8c">checkForEnd</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
+<tr class="separator:a3c16b4171d5f778b52b1680e05f55e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9ab3bb7a8393b940d1fe8295fe94a5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#ae9ab3bb7a8393b940d1fe8295fe94a5e">drawBoard</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
+<tr class="separator:ae9ab3bb7a8393b940d1fe8295fe94a5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a257cc94e839e1caa1fb5e53403770c09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a257cc94e839e1caa1fb5e53403770c09">singleGame</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
+<tr class="separator:a257cc94e839e1caa1fb5e53403770c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0d60270dd247cd57eb75b09522c62e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#af0d60270dd247cd57eb75b09522c62e5">sessionSummary</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
+<tr class="separator:af0d60270dd247cd57eb75b09522c62e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Dokumentacja funkcji</h2>
+<a id="a07afa979d17e9abbc7e4b40b3021a27e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07afa979d17e9abbc7e4b40b3021a27e">&#9670;&nbsp;</a></span>addRoot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structlistOfRoots.html">listOfRoots</a>* addRoot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlistOfRoots.html">listOfRoots</a> *&#160;</td>
+          <td class="paramname"><em>header</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>span</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funkcja dodajaca wezel zawierajacy korzen drzewa dla odpowiedniej wielkosci planszy </p><dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">header</td><td>Pierwszy wezel listy korzeni drzewa </td></tr>
+    <tr><td class="paramname">span</td><td>Dlugosc planszy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Wskaznik na wezel listy zawierajacy wskaznik na odpowiedni korzen drzewa </dd></dl>
+
+</div>
+</div>
 <a id="abf7e2a3358cded005e3939b6750e392c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf7e2a3358cded005e3939b6750e392c">&#9670;&nbsp;</a></span>addToTree()</h2>
 
@@ -166,14 +197,14 @@ Funkcje</h2></td></tr>
 
 </div>
 </div>
-<a id="a5496227439bac3b5f8bb96009532d6b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5496227439bac3b5f8bb96009532d6b4">&#9670;&nbsp;</a></span>Check_For_End()</h2>
+<a id="a3c16b4171d5f778b52b1680e05f55e8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c16b4171d5f778b52b1680e05f55e8c">&#9670;&nbsp;</a></span>checkForEnd()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Check_For_End </td>
+          <td class="memname">void checkForEnd </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a> &amp;&#160;</td>
           <td class="paramname"><em>Game</em></td><td>)</td>
@@ -190,14 +221,14 @@ Funkcje</h2></td></tr>
 
 </div>
 </div>
-<a id="a34426a1e871a22b205af2c17834dc9b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34426a1e871a22b205af2c17834dc9b1">&#9670;&nbsp;</a></span>Check_for_Win()</h2>
+<a id="aa888f859892afece2b177371f8c11828"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa888f859892afece2b177371f8c11828">&#9670;&nbsp;</a></span>checkForWin()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Check_for_Win </td>
+          <td class="memname">bool checkForWin </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a> &amp;&#160;</td>
           <td class="paramname"><em>Game</em></td><td>)</td>
@@ -212,6 +243,24 @@ Funkcje</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Zwraca true, jeœli gra ma zwyciêzce, false, jeœli nie </dd></dl>
+
+</div>
+</div>
+<a id="a2887b2601076414445beefe65b04f593"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2887b2601076414445beefe65b04f593">&#9670;&nbsp;</a></span>checkIfLoaded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void checkIfLoaded </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a> &amp;&#160;</td>
+          <td class="paramname"><em>Game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -251,14 +300,14 @@ Funkcje</h2></td></tr>
 
 </div>
 </div>
-<a id="a0995179d182c9b34f0f641799cf6c8a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0995179d182c9b34f0f641799cf6c8a3">&#9670;&nbsp;</a></span>CPU_Turn()</h2>
+<a id="aeff9566aaa01cee6c9b12efebcc48c1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeff9566aaa01cee6c9b12efebcc48c1b">&#9670;&nbsp;</a></span>CPUTurn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structGamestate.html">Gamestate</a> CPU_Turn </td>
+          <td class="memname"><a class="el" href="structGamestate.html">Gamestate</a> CPUTurn </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a> &amp;&#160;</td>
           <td class="paramname"><em>Game</em></td><td>)</td>
@@ -273,6 +322,30 @@ Funkcje</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Struktura gry zaktualizowana o ruch komputera </dd></dl>
+
+</div>
+</div>
+<a id="a3e3381d127a66d41257161f449316e19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e3381d127a66d41257161f449316e19">&#9670;&nbsp;</a></span>deleteList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void deleteList </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlistOfRoots.html">listOfRoots</a> *&#160;</td>
+          <td class="paramname"><em>header</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funkcja usuwajaca liste zawierajaca korzenie drzewa </p><dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">header</td><td>Pierwszy wezel listy korzeni drzewa </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -294,14 +367,14 @@ Funkcje</h2></td></tr>
 
 </div>
 </div>
-<a id="a153b6de48077369f8574b21a1be79095"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a153b6de48077369f8574b21a1be79095">&#9670;&nbsp;</a></span>Draw_Board()</h2>
+<a id="ae9ab3bb7a8393b940d1fe8295fe94a5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9ab3bb7a8393b940d1fe8295fe94a5e">&#9670;&nbsp;</a></span>drawBoard()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Draw_Board </td>
+          <td class="memname">void drawBoard </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a> &amp;&#160;</td>
           <td class="paramname"><em>Game</em></td><td>)</td>
@@ -354,14 +427,50 @@ Funkcje</h2></td></tr>
 
 </div>
 </div>
-<a id="a9b3af6b29453cc45cfa8b3be883b9659"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b3af6b29453cc45cfa8b3be883b9659">&#9670;&nbsp;</a></span>Initialize_Gamestate()</h2>
+<a id="ade0ee50c741a30efb62ce183918da35f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade0ee50c741a30efb62ce183918da35f">&#9670;&nbsp;</a></span>findRoot()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structGamestate.html">Gamestate</a> Initialize_Gamestate </td>
+          <td class="memname"><a class="el" href="structlistOfRoots.html">listOfRoots</a>* findRoot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlistOfRoots.html">listOfRoots</a> *&#160;</td>
+          <td class="paramname"><em>header</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>span</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funkcja znajdujaca korzen drzewa dla danej wielkosci planszy </p><dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">header</td><td>Pierwszy wezel listy korzeni drzewa </td></tr>
+    <tr><td class="paramname">span</td><td>Dlugosc planszy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Wskaznik na wezel listy zawierajacy wskaznik na odpowiedni korzen drzewa </dd></dl>
+
+</div>
+</div>
+<a id="a44d1236ae068814479b458dafe416afb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44d1236ae068814479b458dafe416afb">&#9670;&nbsp;</a></span>initializeGamestate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initializeGamestate </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a> &amp;&#160;</td>
           <td class="paramname"><em>Game</em></td><td>)</td>
@@ -375,90 +484,17 @@ Funkcje</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Zwraca</dt><dd>Struktura gry gotowa na rozgrywkê </dd></dl>
 
 </div>
 </div>
-<a id="a0cc7d04d6326526b7fba087892724eab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0cc7d04d6326526b7fba087892724eab">&#9670;&nbsp;</a></span>Maziaj_AI()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Maziaj_AI </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td>
-          <td class="paramname"><em>Game</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Funkcja wypisuj¹ca tablice AI w danym momencie </p><dl class="params"><dt>Parametry</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Game</td><td>Struktura gry, z której funkcja pobiera tablice AI </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a07a4dfcaa7862c7050240c2795c6d4d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07a4dfcaa7862c7050240c2795c6d4d6">&#9670;&nbsp;</a></span>Maziaj_moves()</h2>
+<a id="a701f9eb36f715ec45239eef8016a681b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a701f9eb36f715ec45239eef8016a681b">&#9670;&nbsp;</a></span>playerTurn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Maziaj_moves </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td>
-          <td class="paramname"><em>Game</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Funkcja wypisuj¹ca tablicê przechowuj¹c¹ wykonane ruchy w kolejnoœci ich wykonania </p><dl class="params"><dt>Parametry</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Game</td><td>Struktura gry, z której funkcja pobiera tablice moves </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a567921534a33c76db31d671bf976c3ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a567921534a33c76db31d671bf976c3ac">&#9670;&nbsp;</a></span>maziaj_tablice()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void maziaj_tablice </td>
-          <td>(</td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>T</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Funkcja wypisuj¹ca dan¹ tablice </p><dl class="params"><dt>Parametry</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">T</td><td>wskaŸnik na tablice, któr¹ funkcja ma wypisac </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ad0e6beef0ff91ec9882b570e32fd5c8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0e6beef0ff91ec9882b570e32fd5c8d">&#9670;&nbsp;</a></span>Player_Turn()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structGamestate.html">Gamestate</a> Player_Turn </td>
+          <td class="memname"><a class="el" href="structGamestate.html">Gamestate</a> playerTurn </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a> &amp;&#160;</td>
           <td class="paramname"><em>Game</em></td><td>)</td>
@@ -476,46 +512,16 @@ Funkcje</h2></td></tr>
 
 </div>
 </div>
-<a id="a491163ac1c3a0102fdb23244a1a7274e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a491163ac1c3a0102fdb23244a1a7274e">&#9670;&nbsp;</a></span>preOrder()</h2>
+<a id="afb3587c525c258addca3a756be401476"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb3587c525c258addca3a756be401476">&#9670;&nbsp;</a></span>readFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void preOrder </td>
+          <td class="memname"><a class="el" href="structboardTree.html">boardTree</a>* readFile </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td>
-          <td class="paramname"><em>root</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Funkcja wypisuj¹ca drzewo binarne w kolejnoœci najpierw na korzeniu, potem na nastêpnikach </p><dl class="params"><dt>Parametry</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">T</td><td>wskaŸnik na tablice, któr¹ funkcja ma wypisac </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="abb36f9b9fedc756a16dc0eae6e1ea39b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb36f9b9fedc756a16dc0eae6e1ea39b">&#9670;&nbsp;</a></span>read_file_3()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structboardTree.html">boardTree</a>* read_file_3 </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td>
-          <td class="paramname"><em>root</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a> &amp;&#160;</td>
           <td class="paramname"><em>Game</em>, </td>
         </tr>
         <tr>
@@ -531,50 +537,7 @@ Funkcje</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Funkcja sczytuj¹ca drzewo binarne gry 3x3 z pliku </p><dl class="params"><dt>Parametry</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">root</td><td>wskaŸnik, do którego funkcja ma do³¹czyæ sczytane drzewo </td></tr>
-    <tr><td class="paramname">Game</td><td>Struktura gry, z której funkcja pobiera wielkoœæ planszy </td></tr>
-    <tr><td class="paramname">f</td><td>Strumien wejsciowy, za pomoca ktorego odczytujemy </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Zwraca</dt><dd>wskaŸnik na pierwszy wêze³, który zosta³ do³¹czony </dd></dl>
-
-</div>
-</div>
-<a id="a95342a2a26449be69fa7039fb9cda59c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95342a2a26449be69fa7039fb9cda59c">&#9670;&nbsp;</a></span>read_file_5()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structboardTree.html">boardTree</a>* read_file_5 </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td>
-          <td class="paramname"><em>root</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td>
-          <td class="paramname"><em>Game</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ifstream &amp;&#160;</td>
-          <td class="paramname"><em>f</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Funkcja sczytuj¹ca drzewo binarne gry 3x3 z pliku </p><dl class="params"><dt>Parametry</dt><dd>
+<p>Funkcja sczytuj¹ca drzewo binarne gry z odpowiedniego pliku </p><dl class="params"><dt>Parametry</dt><dd>
   <table class="params">
     <tr><td class="paramname">root</td><td>wskaŸnik, do którego funkcja ma do³¹czyæ sczytane drzewo </td></tr>
     <tr><td class="paramname">Game</td><td>Struktura gry, z której funkcja pobiera wielkoœæ planszy </td></tr>
@@ -635,14 +598,14 @@ Funkcje</h2></td></tr>
 
 </div>
 </div>
-<a id="a49295cf09fab2f97e2ebef05012bb29d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49295cf09fab2f97e2ebef05012bb29d">&#9670;&nbsp;</a></span>Session_Summary()</h2>
+<a id="af0d60270dd247cd57eb75b09522c62e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0d60270dd247cd57eb75b09522c62e5">&#9670;&nbsp;</a></span>sessionSummary()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Session_Summary </td>
+          <td class="memname">void sessionSummary </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a> &amp;&#160;</td>
           <td class="paramname"><em>Game</em></td><td>)</td>
@@ -659,14 +622,14 @@ Funkcje</h2></td></tr>
 
 </div>
 </div>
-<a id="a6a15ea70a172904fe4b99e15005e27a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a15ea70a172904fe4b99e15005e27a5">&#9670;&nbsp;</a></span>Single_Game()</h2>
+<a id="a257cc94e839e1caa1fb5e53403770c09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a257cc94e839e1caa1fb5e53403770c09">&#9670;&nbsp;</a></span>singleGame()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structGamestate.html">Gamestate</a> Single_Game </td>
+          <td class="memname"><a class="el" href="structGamestate.html">Gamestate</a> singleGame </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a> &amp;&#160;</td>
           <td class="paramname"><em>Game</em></td><td>)</td>
@@ -684,17 +647,23 @@ Funkcje</h2></td></tr>
 
 </div>
 </div>
-<a id="a45ff980dd465e04432bdfaed7e3be87b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45ff980dd465e04432bdfaed7e3be87b">&#9670;&nbsp;</a></span>write_file_3()</h2>
+<a id="a8f006e48755291490e5b9132155a84bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f006e48755291490e5b9132155a84bd">&#9670;&nbsp;</a></span>writeFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void write_file_3 </td>
+          <td class="memname">void writeFile </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td>
           <td class="paramname"><em>root</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>span</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -709,42 +678,7 @@ Funkcje</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Funkcja zapisuj¹ca drzewo binarne gry 3x3 do pliku </p><dl class="params"><dt>Parametry</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">root</td><td>Korzen zapisywanego drzewa </td></tr>
-    <tr><td class="paramname">f</td><td>Strumien wyjsciowy, za pomoca ktorego zapisujemy </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a1b42d1b04bf6e89c00c535fcc29b0b9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b42d1b04bf6e89c00c535fcc29b0b9c">&#9670;&nbsp;</a></span>write_file_5()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void write_file_5 </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structboardTree.html">boardTree</a> *&#160;</td>
-          <td class="paramname"><em>root</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ofstream &amp;&#160;</td>
-          <td class="paramname"><em>f</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Funkcja zapisuj¹ca drzewo binarne gry 5x5 do pliku </p><dl class="params"><dt>Parametry</dt><dd>
+<p>Funkcja zapisuj¹ca drzewo binarne gry do odpowiedniego pliku </p><dl class="params"><dt>Parametry</dt><dd>
   <table class="params">
     <tr><td class="paramname">root</td><td>Korzen zapisywanego drzewa </td></tr>
     <tr><td class="paramname">f</td><td>Strumien wyjsciowy, za pomoca ktorego zapisujemy </td></tr>
