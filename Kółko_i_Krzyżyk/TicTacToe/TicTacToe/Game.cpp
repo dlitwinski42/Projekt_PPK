@@ -220,24 +220,35 @@ int scoreCheck(Gamestate Game) {
 	for (int i = 0; i < (Game.span * Game.span); i++) {
 
 		if (Game.AI[i] == 0) {
+			//Wypełniamy tablice możliwymi ruchami w danej chwili (Pola, dla których tablica AI zawiera 0)
 			available_moves[j] = i + 1;
 			j++;
 		}
 	}
 	for (int i = 0; i < j; i++) {
+		//Symulujemy ruch - zmieniamy odpowiednie pole w tablicy AI na 1
 		Game.AI[(available_moves[i] - 1)] = 1;
+		//Sprawdzamy, czy taki stan planszy już istnieje w naszym drzewie
 		score_donor = find(Game.current_root, Game);
 		if (score_donor == nullptr) {
 			if (!best_init) {
+				/*Jeśli zmienna best_score nie ma jeszcze przypisanej jakiejkolwiek wartosci (best_init = false),
+				znaczy, że jest to pierwszy ruch jaki rozważamy i przyjmujemy go bez sprawdzania jego wartosci.
+				(Wartosc dla pól nieznanych jest przyjmowana jako 0)
+				*/
 				best_score = 0;
 				preferred_move = i;
 				best_init = true;
 			}
 			else if (best_score < 0) {
+				/*Jeżeli pole uznane za najlepsze do tej pory ma wartość mniejszą od zero (powoduje przegraną),
+				ustawiamy pole nieznane jako to, które komputer ma wybrać i zmieniamy najlepszą znalezioną wartość na 0
+				*/
 				best_score = 0;
 				preferred_move = i;
 			}
 			else if (best_score == 0) {
+				//W przypadku, kiedy dwa pola mają taką samą wartość, losowane jest jedno spośród nich
 				conf_resolve = rand() % 2;
 				if (conf_resolve == 0) {
 
@@ -250,15 +261,22 @@ int scoreCheck(Gamestate Game) {
 		}
 		else {
 			if (!best_init) {
+				/*Jeśli zmienna best_score nie ma jeszcze przypisanej jakiejkolwiek wartosci (best_init = false),
+				znaczy, że jest to pierwszy ruch jaki rozważamy i przyjmujemy go bez sprawdzania jego wartosci.
+				*/
 				best_score = score_donor->score;
 				preferred_move = i;
 				best_init = true;
 			}
 			else if (score_donor->score > best_score) {
+				/*Jeżeli pole uznane za najlepsze do tej pory ma wartość mniejszą od pola obecnie rozważanego, ustawiamy
+				go jako pole do wybrania i jego wartość staje się największą wartością
+				*/
 				best_score = score_donor->score;
 				preferred_move = i;
 			}
 			else if (score_donor->score == best_score) {
+				//W przypadku, kiedy dwa pola mają taką samą wartość, losowane jest jedno spośród nich
 				conf_resolve = rand() % 2;
 				if (conf_resolve == 0) {
 
@@ -269,6 +287,7 @@ int scoreCheck(Gamestate Game) {
 				}
 			}
 		}
+		//Koniec symulacji - zmieniamy odpowiednie pole w tablicy AI spowrotem na 0, wracając do obecnego stanu
 		Game.AI[(available_moves[i] - 1)] = 0;
 	}
 		preferred_move = available_moves[preferred_move];
@@ -283,6 +302,11 @@ void scoreUpdate(Gamestate &Game) {
 		for (int i = 0; i < Game.Turn_Counter; i++) {
 			Game.AI[(Game.moves[((Game.Turn_Counter) - i) - 1]) - 1] = 0;
 			if (i == 0) {
+				/*
+				Aby zapobiec "zrażaniu" się komputera do danych pól, w przypadku przegranej jedyne stany planszy, którym
+				zmieniamy score to plansza, która jest wygrywającą dla gracza (ostatnia) oraz ta, która pozwoliła graczowi
+				wygrać w następnym ruchu (przedostatnia)
+				*/
 				Updated_Node = find(Game.current_root, Game);
 				Updated_Node->score -= 1;
 			}
@@ -294,6 +318,11 @@ void scoreUpdate(Gamestate &Game) {
 		Updated_Node = find(Game.current_root, Game);
 		Updated_Node->score += 1;
 		for (int i = 0; i < Game.Turn_Counter; i++) {
+			/*
+			W przypadku dobrego rezultatu, każdy stan planszy jaki się pojawił podczas gry ma score podwyższany o 1,
+			aby komputer wiedział na przyszłość, że do takiego stanu ma dążyć. Wyciągamy od końca odpowiednie numery
+			pól z tablicy moves, zerujemy odpowiadające im pola w tablicy AI i następnie zmieniamy score
+			*/
 			Game.AI[(Game.moves[((Game.Turn_Counter) - i) - 1]) - 1] = 0;
 			Updated_Node = find(Game.current_root, Game);
 			Updated_Node->score += 1;
@@ -329,6 +358,10 @@ void initializeGamestate(Gamestate &Game) {
 	else {
 		Game.CPU = cross;
 	}
+	/*
+	Utworzenie tablicy odpowiadającej bezpośrednio za wyświetlanie planszy, przechowuje ona zera w przypadku pustych pól,
+	w przypadku pól zajętych znaki odpowiadające danemu graczowi.
+	*/
 	Game.T = new char*[Game.span];
 	for (int i = 0; i < Game.span; ++i)
 		Game.T[i] = new char[Game.span];
@@ -340,10 +373,19 @@ void initializeGamestate(Gamestate &Game) {
 			Game.T[i][j] = none;
 		}
 	}
+	/*
+	Tworzenie tablicy AI, wykorzystywanej w wyborze ruchu dla komputera, każdy stan planszy jest zapisywany w tej tablicy.
+	Dla planszy 3x3 tablica będzie miała 9 elementów. Wartość -1 oznacza pole zajęte przez gracza, wartość 1 pole zajęte
+	przez komputer, natomiast pole 0 oznacza pole wolne.
+	*/
 	Game.AI = new int[(Game.span * Game.span)];
 	for (int i = 0; i < (Game.span * Game.span); ++i) {
 		Game.AI[i] = 0;
 	}
+	/*
+	Tworzenie tablicy moves, w której zapisywane są ruchy wybrane zarówno przez gracza jak i przeciwnika.
+	Tablica ta wykorzystywana jest potem, aby wyzerowywać w odpowiedni sposób tablice AI i zmieniać jej wartość(score)
+	*/
 	Game.moves = new int[(Game.span * Game.span)];
 	for (int i = 0; i < (Game.span * Game.span); ++i) {
 		Game.moves[i] = 0;
@@ -371,11 +413,15 @@ Gamestate playerTurn(Gamestate &Game) {
 		i = (chosen_field - 1) / Game.span;
 		j = (chosen_field + (Game.span - 1)) % Game.span;
 		if (Game.T[i][j] == none) {
+			// Ustawiamy odpowiedni znak w tablicy odpowiadającej za plansze
 			Game.T[i][j] = Game.Player;
+			// Ustawiamy -1 w miejscu tablicy AI odpowiadającym polu, które wybrał gracz
 			Game.AI[(chosen_field - 1)] = -1;
 			if (find(Game.current_root, Game) == nullptr) {
+				//Jeżeli dana plansza pojawiła się po raz pierwszy i nie ma jej w drzewie, dodajemy ją do drzewa
 				addToTree(Game.current_root, Game);
 			}
+			// Zapisujemy, które pole zostało wybrane w danym ruchu
 			Game.moves[Game.Turn_Counter] = chosen_field;
 			Game.Turn_Counter++;
 			break;
@@ -404,9 +450,12 @@ Gamestate CPUTurn(Gamestate &Game) {
 		i = (chosen_field - 1) / Game.span;
 		j = (chosen_field + (Game.span - 1)) % Game.span;
 	}
+	// Ustawiamy odpowiedni znak w tablicy odpowiadającej za plansze
 	Game.T[i][j] = Game.CPU;
+	// Ustawiamy 1 w miejscu tablicy AI odpowiadającym polu, które wybrał komputer
 	Game.AI[(chosen_field - 1)] = 1;
 	if (find(Game.current_root, Game) == nullptr) {
+		//Jeżeli dana plansza pojawiła się po raz pierwszy i nie ma jej w drzewie, dodajemy ją do drzewa
 		addToTree(Game.current_root, Game);
 	}
 	Game.moves[Game.Turn_Counter] = chosen_field;
@@ -425,6 +474,7 @@ bool checkForWin(Gamestate &Game) {
 				break;
 			}
 			else if ((j == (Game.span - 1) && (Game.T[i][j] == Game.T[i][j - 1]))) {
+				//Sprawdzenie, czy gra zakończyła się, ponieważ któryś z graczy ułożył x znaków w linii poziomej
 				Win = true;
 				if (Game.T[i][j] == Game.Player) {
 					Game.Player_Wins++;
@@ -448,6 +498,7 @@ bool checkForWin(Gamestate &Game) {
 				break;
 			}
 			else if ((j == (Game.span - 1) && (Game.T[j][i] == Game.T[j - 1][i]))) {
+				//Sprawdzenie, czy gra zakończyła się, ponieważ któryś z graczy ułożył x znaków w linii pionowej
 				Win = true;
 				if (Game.T[j][i] == Game.Player) {
 					Game.Player_Wins++;
@@ -470,6 +521,10 @@ bool checkForWin(Gamestate &Game) {
 			break;
 		}
 		else if ((i == (Game.span - 1) && (Game.T[i][i] == Game.T[i - 1][i - 1]))) {
+			/*
+			Sprawdzenie, czy gra zakończyła się, ponieważ któryś z graczy ułożył x znaków po przekątnej od lewego
+			górnego rogu do prawego dolnego
+			*/
 			Win = true;
 			if (Game.T[i][i] == Game.Player) {
 				Game.Player_Wins++;
@@ -491,6 +546,10 @@ bool checkForWin(Gamestate &Game) {
 			break;
 		}
 		else if ((i == (Game.span - 1) && (Game.T[i][(Game.span - 1) - i] == Game.T[i - 1][Game.span - i]))) {
+		/*
+		Sprawdzenie, czy gra zakończyła się, ponieważ któryś z graczy ułożył x znaków po przekątnej od prawego
+		górnego rogu do lewego dolnego
+		*/
 			Win = true;
 			if (Game.T[i][(Game.span - 1) - i] == Game.Player) {
 				Game.Player_Wins++;
@@ -514,6 +573,9 @@ void checkForEnd(Gamestate &Game) {
 		return;
 	}
 	else if (Game.Turn_Counter == Game.span * Game.span) {
+		/*Jeżeli liczba wykonanych ruchów równa się długości planszy do potęgi drugiej i nie ma zwycięzcy, znaczy, że gra
+		zakończyła się remisem
+		*/
 		Game.Winner = 3;
 		cout << "Remis!" << endl;
 		return;
