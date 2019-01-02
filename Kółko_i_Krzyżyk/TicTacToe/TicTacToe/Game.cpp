@@ -402,10 +402,10 @@ Gamestate playerTurn(Gamestate &Game) {
 			cin.getline(input, 3);
 			a = input[0] - 48;
 			b = input[1] - 48;
-			if ((b == -48) && (a > 0 && a < 9)) {
+			if ((b == -48) && (a > 0 && (a < 10))) {
 				chosen_field = a;
 			}
-			else if ((b > 0 && b < 9) && (a > 0 && a < 9)) {
+			else if ((b > 0 && b < 9) && (a > 0 && a < 10)) {
 				chosen_field = (a * 10) + b;
 			}
 			delete[] input;
@@ -582,53 +582,65 @@ void checkForEnd(Gamestate &Game) {
 	}
 
 }
+int convertParam(char* input) {
+	int param;
+	char * p;
+	param = strtol(input, &p, 10);
+	if (*p != 0) {
+		cout << "Parametr zawiera litery";
+		return 0;
+	}
+	else {
+		return param;
+	}
+}
 void drawBoard(Gamestate &Game) {
 	int field_nr = 0;
 	if (Game.initialized == false) {
 		initializeGamestate(Game);
 	}
-	cout << (char)(lewy_gorny); //╔
+	cout << (char)(upper_left); //╔
 	for (int i = 0; i < (Game.span - 1); ++i) {
-		cout << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(t_dol); //═══╦ * span
+		cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(t_down); //═══╦ * span
 	}
-	cout << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(prawy_gorny); // ═══╗
+	cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(upper_right); // ═══╗
 	cout << endl;
 	for (int i = 0; i < Game.span; ++i) {
-		cout << (char)(pionowa);
+		cout << (char)(vertical);
 		for (int j = 0; j < Game.span; j++) {
-			cout << "    " << (char)(pionowa);
+			cout << "    " << (char)(vertical);
 		}
 		cout << endl;
-		cout << (char)(pionowa);
+		cout << (char)(vertical);
 		for (int j = 0; j < Game.span; j++) {
 			field_nr++;
 			if (Game.T[i][j] == 0) {
-				cout << " " << setw(2) << field_nr << " " << (char)(pionowa);
+				cout << " " << setw(2) << field_nr << " " << (char)(vertical);
 			}
 			else {
-				cout << " " << setw(2) << Game.T[i][j] << " " << (char)(pionowa);
+				cout << " " << setw(2) << Game.T[i][j] << " " << (char)(vertical);
 			}
 		}
 		cout << endl;
-		cout << (char)(pionowa);
+		cout << (char)(vertical);
 		for (int j = 0; j < Game.span; j++) {
-			cout << "    " << (char)(pionowa);
+			cout << "    " << (char)(vertical);
 		}
 		cout << endl;
 		if (i != (Game.span - 1)) {
-			cout << (char)(t_prawo);
+			cout << (char)(t_right);
 			for (int j = 0; j < (Game.span - 1); j++) {
-				cout << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(skrzyz);
+				cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(intersection);
 			}
-			cout << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(t_lewo);
+			cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(t_left);
 			cout << endl;
 		}
 	}
-	cout << (char)(lewy_dolny);
+	cout << (char)(lower_left);
 	for (int i = 0; i < (Game.span - 1); ++i) {
-		cout << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(t_gora);
+		cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(t_up);
 	}
-	cout << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(pozioma) << (char)(prawy_dolny) << endl;
+	cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(lower_right) << endl;
 }
 Gamestate singleGame(Gamestate &Game) {
 	drawBoard(Game);

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['t_5fdol',['t_dol',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aab76d0a9ca59de6322337beca90e9b824',1,'Game.h']]],
-  ['t_5fgora',['t_gora',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aabad4786c9f43e683c42b0636f68616f5',1,'Game.h']]],
-  ['t_5flewo',['t_lewo',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa051f07447a5f0854b266f7d9616e732f',1,'Game.h']]],
-  ['t_5fprawo',['t_prawo',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa6f7a5fac699f6610efaea4f3cd9a198a',1,'Game.h']]]
+  ['t_5fdown',['t_down',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa444064e2d207b022177ce469bca1c57f',1,'Game.h']]],
+  ['t_5fleft',['t_left',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aacee1d48417e148fa258e4611e28c4d69',1,'Game.h']]],
+  ['t_5fright',['t_right',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa3b1504b44196715aa887be5853299506',1,'Game.h']]],
+  ['t_5fup',['t_up',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa5955b2602e1a93ff9aa1527e45af7c8d',1,'Game.h']]]
 ];

@@ -81,8 +81,8 @@ $(function() {
 , <a class="el" href="Game_8h.html#a3c16b4171d5f778b52b1680e05f55e8c">Game.h</a>
 </li>
 <li>checkForWin()
-: <a class="el" href="Game_8cpp.html#aa888f859892afece2b177371f8c11828">Game.cpp</a>
-, <a class="el" href="Game_8h.html#aa888f859892afece2b177371f8c11828">Game.h</a>
+: <a class="el" href="Game_8h.html#aa888f859892afece2b177371f8c11828">Game.h</a>
+, <a class="el" href="Game_8cpp.html#aa888f859892afece2b177371f8c11828">Game.cpp</a>
 </li>
 <li>checkIfLoaded()
 : <a class="el" href="Game_8cpp.html#a2887b2601076414445beefe65b04f593">Game.cpp</a>
@@ -91,8 +91,12 @@ $(function() {
 : <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa1155d8992f910feb05ac24fc65521792">Game.h</a>
 </li>
 <li>compareBoards()
-: <a class="el" href="Game_8cpp.html#a7c3ddd5eb6a712abc7323b7facf82374">Game.cpp</a>
-, <a class="el" href="Game_8h.html#a7c3ddd5eb6a712abc7323b7facf82374">Game.h</a>
+: <a class="el" href="Game_8h.html#a7c3ddd5eb6a712abc7323b7facf82374">Game.h</a>
+, <a class="el" href="Game_8cpp.html#a7c3ddd5eb6a712abc7323b7facf82374">Game.cpp</a>
+</li>
+<li>convertParam()
+: <a class="el" href="Game_8cpp.html#ade4d1fd7f51aa986758f2c524113cddb">Game.cpp</a>
+, <a class="el" href="Game_8h.html#ade4d1fd7f51aa986758f2c524113cddb">Game.h</a>
 </li>
 <li>CPUTurn()
 : <a class="el" href="Game_8cpp.html#aeff9566aaa01cee6c9b12efebcc48c1b">Game.cpp</a>
@@ -131,20 +135,30 @@ $(function() {
 </ul>
 
 
+<h3><a id="index_h"></a>- h -</h3><ul>
+<li>horizontal
+: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aac84387af3365dd0e5cffb2705e68b585">Game.h</a>
+</li>
+</ul>
+
+
 <h3><a id="index_i"></a>- i -</h3><ul>
 <li>initializeGamestate()
 : <a class="el" href="Game_8cpp.html#a44d1236ae068814479b458dafe416afb">Game.cpp</a>
 , <a class="el" href="Game_8h.html#a44d1236ae068814479b458dafe416afb">Game.h</a>
 </li>
+<li>intersection
+: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa56e7f14e25cb087e7027eccc0cac522a">Game.h</a>
+</li>
 </ul>
 
 
 <h3><a id="index_l"></a>- l -</h3><ul>
-<li>lewy_dolny
-: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aaae3c4a93180f8feac12231678d2c5a2e">Game.h</a>
+<li>lower_left
+: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa1ec1897ba1c4b4049cae258f242489ed">Game.h</a>
 </li>
-<li>lewy_gorny
-: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aacf7d4c8cc146f584c33940279342fccc">Game.h</a>
+<li>lower_right
+: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa8bb8c1f8f4ea1ab21d548508394e7d65">Game.h</a>
 </li>
 </ul>
 
@@ -164,21 +178,9 @@ $(function() {
 
 
 <h3><a id="index_p"></a>- p -</h3><ul>
-<li>pionowa
-: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa1b19d36c8c54907793315bc5d59df929">Game.h</a>
-</li>
 <li>playerTurn()
 : <a class="el" href="Game_8cpp.html#a701f9eb36f715ec45239eef8016a681b">Game.cpp</a>
 , <a class="el" href="Game_8h.html#a701f9eb36f715ec45239eef8016a681b">Game.h</a>
-</li>
-<li>pozioma
-: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa39a04c5b3acbc20068bd87133d3c6f10">Game.h</a>
-</li>
-<li>prawy_dolny
-: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa4b5d3adc81380f2f00f6602a59b80d13">Game.h</a>
-</li>
-<li>prawy_gorny
-: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa26a7e4e8c904dc7b35e1ebce13572711">Game.h</a>
 </li>
 </ul>
 
@@ -197,35 +199,49 @@ $(function() {
 , <a class="el" href="Game_8h.html#af8d1acbac6fd39aad185728a21c69e43">Game.h</a>
 </li>
 <li>scoreUpdate()
-: <a class="el" href="Game_8cpp.html#a2c998ffcd4d7b21883bffb63385deabb">Game.cpp</a>
-, <a class="el" href="Game_8h.html#a2c998ffcd4d7b21883bffb63385deabb">Game.h</a>
+: <a class="el" href="Game_8h.html#a2c998ffcd4d7b21883bffb63385deabb">Game.h</a>
+, <a class="el" href="Game_8cpp.html#a2c998ffcd4d7b21883bffb63385deabb">Game.cpp</a>
 </li>
 <li>sessionSummary()
 : <a class="el" href="Game_8cpp.html#af0d60270dd247cd57eb75b09522c62e5">Game.cpp</a>
 , <a class="el" href="Game_8h.html#af0d60270dd247cd57eb75b09522c62e5">Game.h</a>
 </li>
 <li>singleGame()
-: <a class="el" href="Game_8cpp.html#a257cc94e839e1caa1fb5e53403770c09">Game.cpp</a>
-, <a class="el" href="Game_8h.html#a257cc94e839e1caa1fb5e53403770c09">Game.h</a>
-</li>
-<li>skrzyz
-: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aaa14d7967f7675a7bcc6b24353ff6cfec">Game.h</a>
+: <a class="el" href="Game_8h.html#a257cc94e839e1caa1fb5e53403770c09">Game.h</a>
+, <a class="el" href="Game_8cpp.html#a257cc94e839e1caa1fb5e53403770c09">Game.cpp</a>
 </li>
 </ul>
 
 
 <h3><a id="index_t"></a>- t -</h3><ul>
-<li>t_dol
-: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aab76d0a9ca59de6322337beca90e9b824">Game.h</a>
+<li>t_down
+: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa444064e2d207b022177ce469bca1c57f">Game.h</a>
 </li>
-<li>t_gora
-: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aabad4786c9f43e683c42b0636f68616f5">Game.h</a>
+<li>t_left
+: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aacee1d48417e148fa258e4611e28c4d69">Game.h</a>
 </li>
-<li>t_lewo
-: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa051f07447a5f0854b266f7d9616e732f">Game.h</a>
+<li>t_right
+: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa3b1504b44196715aa887be5853299506">Game.h</a>
 </li>
-<li>t_prawo
-: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa6f7a5fac699f6610efaea4f3cd9a198a">Game.h</a>
+<li>t_up
+: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa5955b2602e1a93ff9aa1527e45af7c8d">Game.h</a>
+</li>
+</ul>
+
+
+<h3><a id="index_u"></a>- u -</h3><ul>
+<li>upper_left
+: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa325c86acd9f99c09012cf09384b36bd6">Game.h</a>
+</li>
+<li>upper_right
+: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa8200aa728f75028213ddceef319ee16c">Game.h</a>
+</li>
+</ul>
+
+
+<h3><a id="index_v"></a>- v -</h3><ul>
+<li>vertical
+: <a class="el" href="Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa270a1cbccb65bff055850369d8494b4c">Game.h</a>
 </li>
 </ul>
 

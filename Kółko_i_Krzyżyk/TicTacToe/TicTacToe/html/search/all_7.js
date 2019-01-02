@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['left',['left',['../structboardTree.html#aaa5cae793c31c71ae3a71eb0a7c66c2e',1,'boardTree']]],
-  ['lewy_5fdolny',['lewy_dolny',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aaae3c4a93180f8feac12231678d2c5a2e',1,'Game.h']]],
-  ['lewy_5fgorny',['lewy_gorny',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aacf7d4c8cc146f584c33940279342fccc',1,'Game.h']]],
-  ['list_5fheader',['list_header',['../structGamestate.html#a56c6d9ebf99eef81397ea0c093f8a632',1,'Gamestate']]],
-  ['listofroots',['listOfRoots',['../structlistOfRoots.html',1,'']]]
+  ['initialized',['initialized',['../structGamestate.html#afe089798ca4d65d47cdf65cf070f43c6',1,'Gamestate']]],
+  ['initializegamestate',['initializeGamestate',['../Game_8cpp.html#a44d1236ae068814479b458dafe416afb',1,'initializeGamestate(Gamestate &amp;Game):&#160;Game.cpp'],['../Game_8h.html#a44d1236ae068814479b458dafe416afb',1,'initializeGamestate(Gamestate &amp;Game):&#160;Game.cpp']]],
+  ['intersection',['intersection',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa56e7f14e25cb087e7027eccc0cac522a',1,'Game.h']]]
 ];

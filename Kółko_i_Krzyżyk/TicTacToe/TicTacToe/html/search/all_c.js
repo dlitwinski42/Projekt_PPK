@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['score',['score',['../structboardTree.html#a92a2015587febcc571b7c33aa58d8f74',1,'boardTree']]],
-  ['scorecheck',['scoreCheck',['../Game_8cpp.html#af8d1acbac6fd39aad185728a21c69e43',1,'scoreCheck(Gamestate Game):&#160;Game.cpp'],['../Game_8h.html#af8d1acbac6fd39aad185728a21c69e43',1,'scoreCheck(Gamestate Game):&#160;Game.cpp']]],
-  ['scoreupdate',['scoreUpdate',['../Game_8cpp.html#a2c998ffcd4d7b21883bffb63385deabb',1,'scoreUpdate(Gamestate &amp;Game):&#160;Game.cpp'],['../Game_8h.html#a2c998ffcd4d7b21883bffb63385deabb',1,'scoreUpdate(Gamestate &amp;Game):&#160;Game.cpp']]],
-  ['sessionsummary',['sessionSummary',['../Game_8cpp.html#af0d60270dd247cd57eb75b09522c62e5',1,'sessionSummary(Gamestate &amp;Game):&#160;Game.cpp'],['../Game_8h.html#af0d60270dd247cd57eb75b09522c62e5',1,'sessionSummary(Gamestate &amp;Game):&#160;Game.cpp']]],
-  ['singlegame',['singleGame',['../Game_8cpp.html#a257cc94e839e1caa1fb5e53403770c09',1,'singleGame(Gamestate &amp;Game):&#160;Game.cpp'],['../Game_8h.html#a257cc94e839e1caa1fb5e53403770c09',1,'singleGame(Gamestate &amp;Game):&#160;Game.cpp']]],
-  ['skrzyz',['skrzyz',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aaa14d7967f7675a7bcc6b24353ff6cfec',1,'Game.h']]],
-  ['span',['span',['../structlistOfRoots.html#a76ec1ab9eb4e1ca01e2c4fc087d28112',1,'listOfRoots::span()'],['../structGamestate.html#afc65a9e3333b467ee65998c17d661a7a',1,'Gamestate::span()']]]
+  ['readfile',['readFile',['../Game_8cpp.html#afb3587c525c258addca3a756be401476',1,'readFile(Gamestate &amp;Game, ifstream &amp;f):&#160;Game.cpp'],['../Game_8h.html#afb3587c525c258addca3a756be401476',1,'readFile(Gamestate &amp;Game, ifstream &amp;f):&#160;Game.cpp']]],
+  ['rematch',['Rematch',['../structGamestate.html#aa4c572e73a9d772b791a394e16c83e47',1,'Gamestate']]],
+  ['right',['right',['../structboardTree.html#a531e6b9d343d3d37cb0416d5e7f3e7b9',1,'boardTree']]],
+  ['root',['root',['../structlistOfRoots.html#a77599ca2941a5c219db76dbe91968f33',1,'listOfRoots']]]
 ];

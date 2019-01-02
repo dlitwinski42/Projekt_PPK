@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['main',['main',['../TicTacToe_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'TicTacToe.cpp']]],
-  ['moves',['moves',['../structGamestate.html#a439f9eb905e2613169c8bb3b72310ff6',1,'Gamestate']]]
+  ['left',['left',['../structboardTree.html#aaa5cae793c31c71ae3a71eb0a7c66c2e',1,'boardTree']]],
+  ['list_5fheader',['list_header',['../structGamestate.html#a56c6d9ebf99eef81397ea0c093f8a632',1,'Gamestate']]],
+  ['listofroots',['listOfRoots',['../structlistOfRoots.html',1,'']]],
+  ['lower_5fleft',['lower_left',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa1ec1897ba1c4b4049cae258f242489ed',1,'Game.h']]],
+  ['lower_5fright',['lower_right',['../Game_8h.html#ad519ce9be72b9d9aa3389c5549083a1aa8bb8c1f8f4ea1ab21d548508394e7d65',1,'Game.h']]]
 ];

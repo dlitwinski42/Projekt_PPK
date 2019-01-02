@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['readfile',['readFile',['../Game_8cpp.html#afb3587c525c258addca3a756be401476',1,'readFile(Gamestate &amp;Game, ifstream &amp;f):&#160;Game.cpp'],['../Game_8h.html#afb3587c525c258addca3a756be401476',1,'readFile(Gamestate &amp;Game, ifstream &amp;f):&#160;Game.cpp']]],
-  ['rematch',['Rematch',['../structGamestate.html#aa4c572e73a9d772b791a394e16c83e47',1,'Gamestate']]],
-  ['right',['right',['../structboardTree.html#a531e6b9d343d3d37cb0416d5e7f3e7b9',1,'boardTree']]],
-  ['root',['root',['../structlistOfRoots.html#a77599ca2941a5c219db76dbe91968f33',1,'listOfRoots']]]
+  ['player',['Player',['../structGamestate.html#a8b7782e43580558d73d084bf1afe5912',1,'Gamestate']]],
+  ['player_5fwins',['Player_Wins',['../structGamestate.html#adaf20cbcde53c7cb9b5b68e1d635a8dc',1,'Gamestate']]],
+  ['playerturn',['playerTurn',['../Game_8cpp.html#a701f9eb36f715ec45239eef8016a681b',1,'playerTurn(Gamestate &amp;Game):&#160;Game.cpp'],['../Game_8h.html#a701f9eb36f715ec45239eef8016a681b',1,'playerTurn(Gamestate &amp;Game):&#160;Game.cpp']]],
+  ['pnext',['pNext',['../structlistOfRoots.html#af8751cab8b7fc3aca51d83e7c9db45b0',1,'listOfRoots']]]
 ];
