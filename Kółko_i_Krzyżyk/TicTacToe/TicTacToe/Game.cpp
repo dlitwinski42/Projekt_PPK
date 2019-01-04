@@ -341,7 +341,46 @@ void scoreUpdate(Gamestate &Game) {
 
 	}
 }
+int* invertAI(Gamestate Game) {
+	int* board = new int[Game.span * Game.span];
+	for (int i = 0; i < (Game.span * Game.span); i++) {
+		board[i] = Game.AI[i] * -1;
+		cout << board[i] << " ";
+	}
+	return board;
+}
+void playerScoreUpdate(Gamestate Game, int* board) {
+	if (Game.Winner == 2) {   //Zły rezultat
+		boardTree* Updated_Node = nullptr;
+		Updated_Node = find(Game.current_root, Game);
+		Updated_Node->score -= 1;
+		for (int i = 0; i < Game.Turn_Counter; i++) {
+			board[(Game.moves[((Game.Turn_Counter) - i) - 1]) - 1] = 0;
+			if (i == 0) {
+				/*
+				Aby zapobiec "zrażaniu" się komputera do danych pól, w przypadku przegranej jedyne stany planszy, którym
+				zmieniamy score to plansza, która jest wygrywającą dla gracza (ostatnia) oraz ta, która pozwoliła graczowi
+				wygrać w następnym ruchu (przedostatnia)
+				*/
+				Updated_Node = find(Game.current_root, Game);
+				Updated_Node->score -= 1;
+			}
+		}
 
+	}
+	else if (Game.Winner == 1) { //Najlepszy rezultat (Gracz wygrał)
+		boardTree* Updated_Node = nullptr;
+		Updated_Node = find(Game.current_root, Game);
+		Updated_Node->score += 3;
+		for (int i = 0; i < Game.Turn_Counter; i++) {
+			board[(Game.moves[((Game.Turn_Counter) - i) - 1]) - 1] = 0;
+			Updated_Node = find(Game.current_root, Game);
+			Updated_Node->score += 3;
+		}
+
+	}
+	delete[] board;
+}
 void initializeGamestate(Gamestate &Game) {
 	string input_span;
 	Game.Winner = 0;
@@ -656,10 +695,10 @@ Gamestate singleGame(Gamestate &Game) {
 			drawBoard(Game);
 			checkForEnd(Game);
 			if (Game.Winner != 0) {
-				scoreUpdate(Game);
 				ofstream fo;
 				fo.open(to_string(Game.span));
 				writeFile(Game.current_root, Game.span, fo);
+				playerScoreUpdate(Game, invertAI(Game));
 				scoreUpdate(Game);
 				Game.initialized = false;
 				break;
@@ -668,10 +707,10 @@ Gamestate singleGame(Gamestate &Game) {
 			drawBoard(Game);
 			checkForEnd(Game);
 			if (Game.Winner != 0) {
-				scoreUpdate(Game);
 				ofstream fo;
 				fo.open(to_string(Game.span));
 				writeFile(Game.current_root, Game.span, fo);
+				playerScoreUpdate(Game, invertAI(Game));
 				scoreUpdate(Game);
 				Game.initialized = false;
 				break;
@@ -689,6 +728,7 @@ Gamestate singleGame(Gamestate &Game) {
 				ofstream fo;
 				fo.open(to_string(Game.span));
 				writeFile(Game.current_root, Game.span, fo);
+				playerScoreUpdate(Game, invertAI(Game));
 				scoreUpdate(Game);
 				Game.initialized = false;
 				break;
@@ -697,10 +737,11 @@ Gamestate singleGame(Gamestate &Game) {
 			drawBoard(Game);
 			checkForEnd(Game);
 			if (Game.Winner != 0) {
-				scoreUpdate(Game);
 				ofstream fo;
 				fo.open(to_string(Game.span));
 				writeFile(Game.current_root, Game.span, fo);
+				playerScoreUpdate(Game, invertAI(Game));
+				scoreUpdate(Game);
 				Game.initialized = false;
 				break;
 			}

@@ -114,6 +114,17 @@ void writeFile(boardTree* root, int span, ofstream &f);
 */
 int scoreCheck(Gamestate Game);
 
+/**Funkcja tworzaca tablice, w ktorej ruchy gracza traktowane sa jak ruchy komputera i vice versa w celu wykorzystania ruchow gracza do nauki
+@param Game Struktura gry, z której funkcja pobiera tablice AI, ktora jest baza do stworzenia nowej tablicy
+@return wskaznik na nowa tablice
+*/
+int* invertAI(Gamestate Game);
+
+/** Funkcja wykorzystujaca ruchy gracza do nauki sztucznej inteligencji
+@param Game Struktura gry, z której funkcja pobiera tablice moves, oraz ilość ruchów, po którym rozgrywka się zakończyła
+@param board Tablica stworzona przez funkcje invertAI
+*/
+void playerScoreUpdate(Gamestate Game, int* board);
 /** Funkcja zmieniająca wartość ruchów które wystąpiły w danej rozgrywce zgodnie z wynikiem (Wygrana +3, Remis +1, Przegrana -1)
 @param Game Struktura gry, z której funkcja pobiera tablice AI, tablice moves, oraz ilość ruchów, po którym rozgrywka się zakończyła
 */

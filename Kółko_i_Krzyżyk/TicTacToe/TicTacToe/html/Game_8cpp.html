@@ -107,6 +107,10 @@ Funkcje</h2></td></tr>
 <tr class="separator:af8d1acbac6fd39aad185728a21c69e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c998ffcd4d7b21883bffb63385deabb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a2c998ffcd4d7b21883bffb63385deabb">scoreUpdate</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
 <tr class="separator:a2c998ffcd4d7b21883bffb63385deabb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3024f7d43a0ec2d941b851c530c78a3b"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a3024f7d43a0ec2d941b851c530c78a3b">invertAI</a> (<a class="el" href="structGamestate.html">Gamestate</a> Game)</td></tr>
+<tr class="separator:a3024f7d43a0ec2d941b851c530c78a3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a580daf9ac0d8eec34edbea8651c272cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a580daf9ac0d8eec34edbea8651c272cb">playerScoreUpdate</a> (<a class="el" href="structGamestate.html">Gamestate</a> Game, int *board)</td></tr>
+<tr class="separator:a580daf9ac0d8eec34edbea8651c272cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44d1236ae068814479b458dafe416afb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a44d1236ae068814479b458dafe416afb">initializeGamestate</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
 <tr class="separator:a44d1236ae068814479b458dafe416afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a701f9eb36f715ec45239eef8016a681b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Game_8cpp.html#a701f9eb36f715ec45239eef8016a681b">playerTurn</a> (<a class="el" href="structGamestate.html">Gamestate</a> &amp;Game)</td></tr>
@@ -508,6 +512,66 @@ Funkcje</h2></td></tr>
 <p>Funkcja inicjująca rozgrywkę, pyta gracza o parametry gry i tworzy potrzebne tablice </p><dl class="params"><dt>Parametry</dt><dd>
   <table class="params">
     <tr><td class="paramname">Game</td><td>Niezainicjowana struktura gry </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3024f7d43a0ec2d941b851c530c78a3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3024f7d43a0ec2d941b851c530c78a3b">&#9670;&nbsp;</a></span>invertAI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int* invertAI </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td>
+          <td class="paramname"><em>Game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funkcja tworzaca tablice, w ktorej ruchy gracza traktowane sa jak ruchy komputera i vice versa w celu wykorzystania ruchow gracza do nauki </p><dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>Struktura gry, z której funkcja pobiera tablice AI, ktora jest baza do stworzenia nowej tablicy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>wskaznik na nowa tablice </dd></dl>
+
+</div>
+</div>
+<a id="a580daf9ac0d8eec34edbea8651c272cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a580daf9ac0d8eec34edbea8651c272cb">&#9670;&nbsp;</a></span>playerScoreUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void playerScoreUpdate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structGamestate.html">Gamestate</a>&#160;</td>
+          <td class="paramname"><em>Game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>board</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funkcja wykorzystujaca ruchy gracza do nauki sztucznej inteligencji </p><dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>Struktura gry, z której funkcja pobiera tablice moves, oraz ilość ruchów, po którym rozgrywka się zakończyła </td></tr>
+    <tr><td class="paramname">board</td><td>Tablica stworzona przez funkcje invertAI </td></tr>
   </table>
   </dd>
 </dl>
