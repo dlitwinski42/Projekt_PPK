@@ -4,17 +4,9 @@
 #include <fstream>
 using namespace std;
 enum znaki {
-	upper_left = 201, // ╔
-	upper_right = 187, // ╗
-	lower_right = 188, // ╝
-	lower_left = 200, // ╚
-	horizontal = 205, // ═
-	vertical = 186, // ║
-	t_down = 203, // ╦
-	t_up = 202, // ╩
-	t_left = 185, // ╣
-	t_right = 204, // ╠
-	intersection = 206, // ╬
+	horizontal = '-', 
+	vertical = '|',
+	intersection = '+', 
 	cross = 'x',
 	circle = 'o',
 	none = 0

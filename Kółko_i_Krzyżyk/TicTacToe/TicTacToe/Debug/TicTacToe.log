@@ -1,8 +1,5 @@
 ﻿  Game.cpp
-  TicTacToe.cpp
-c:\users\darek\desktop\final commit\projekt_ppk\kółko_i_krzyżyk\tictactoe\tictactoe\tictactoe.cpp(26): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
-  Generowanie kodu...
 c:\users\darek\desktop\final commit\projekt_ppk\kółko_i_krzyżyk\tictactoe\tictactoe\game.cpp(35): warning C4715: "findRoot”: niewszystkie ścieżki kodu zwracają wartość
-c:\users\darek\desktop\final commit\projekt_ppk\kółko_i_krzyżyk\tictactoe\tictactoe\game.cpp(71): warning C4715: "find”: niewszystkie ścieżki kodu zwracają wartość
-c:\users\darek\desktop\final commit\projekt_ppk\kółko_i_krzyżyk\tictactoe\tictactoe\game.cpp(108): warning C4715: "addToTree”: niewszystkie ścieżki kodu zwracają wartość
+c:\users\darek\desktop\final commit\projekt_ppk\kółko_i_krzyżyk\tictactoe\tictactoe\game.cpp(69): warning C4715: "find”: niewszystkie ścieżki kodu zwracają wartość
+c:\users\darek\desktop\final commit\projekt_ppk\kółko_i_krzyżyk\tictactoe\tictactoe\game.cpp(106): warning C4715: "addToTree”: niewszystkie ścieżki kodu zwracają wartość
   TicTacToe.vcxproj -> C:\Users\Darek\Desktop\Final commit\Projekt_PPK\Kółko_i_Krzyżyk\TicTacToe\Debug\TicTacToe.exe

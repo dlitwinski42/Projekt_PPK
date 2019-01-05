@@ -8,12 +8,12 @@
 using namespace std;
 
 int compareBoards(Gamestate Game, int *board) {
-	for (int i = 0; i < (Game.span * Game.span); i++) {
+	for (int i = 0; i < (Game.span * Game.span); i++) {  //Iterujemy po tablicy w poszukiwaniu pierwszej różnej wartości
 		if (Game.AI[i] < board[i]) {
-			return -1;
+			return -1;  //Tablica ma wartość "mniejszą" od porównywanej
 		}
 		else if (Game.AI[i] > board[i]) {
-			return 1;
+			return 1; //Tablica ma wartość "większą" od porównywanej
 		}
 	}
 	return 0;
@@ -25,11 +25,11 @@ listOfRoots* findRoot(listOfRoots* header, int span) {
 		return nullptr;
 	}
 	else {
-		if (header->span == span) {
+		if (header->span == span) {  //Jeśli długość planszy w węźle odpowiada szukanej długości, wtedy zwracamy wskaźnik na węzeł
 			return header;
 		}
 		else {
-			findRoot(header->pNext, span);
+			findRoot(header->pNext, span); //Jeśli długość planszy w węźle nie odpowiada szukanej długośći, wtedy szukamy w następnym węźle
 		}
 	}
 }
@@ -38,18 +38,16 @@ listOfRoots* addRoot(listOfRoots* header, int span) {
 		listOfRoots* new_node = new listOfRoots;
 		cout << "stworzono nowy element listy" << endl;
 		new_node->pNext = header;
-		new_node->span = span;
+		new_node->span = span;  //Tworzymy nowy element listy zawierający obecną długość planszy
 		new_node->root = nullptr;
 		header = new_node;
 		return new_node;
 }
 void deleteList(listOfRoots* header) {
 	if (header->pNext != nullptr) {
-		deleteList(header->pNext);
+		deleteList(header->pNext); //Jeżeli to nie jest ostatni element listy, przechodzimy do następnego
 	}
-	else {
-		delete header;
-	}
+	delete header; //Kiedy element listy jest ostatni, wtedy usuwamy go
 }
 boardTree* find(boardTree * root, Gamestate Game) {
 	boardTree* work_root = root;
@@ -59,13 +57,13 @@ boardTree* find(boardTree * root, Gamestate Game) {
 	if (root != nullptr) {
 		int compared = compareBoards(Game, work_root->AI);
 		if (compared < 0) {
-			return find(work_root->left, Game); //Szukaj w lewo
+			return find(work_root->left, Game); //Szukaj węzła przechodząc na lewo w głąb drzewa binarnego
 		}
 		else if (compared > 0) {
-			return find(work_root->right, Game); //Szukaj w prawo
+			return find(work_root->right, Game); //Szukaj węzła przechodząc na prawo w głąb drzewa binarnego
 		}
 		else {
-			return root; //Znaleziono
+			return root; //Znaleziono szukany węzeł
 		}
 	}
 }
@@ -74,31 +72,31 @@ boardTree* addToTree(boardTree* root, Gamestate Game) {
 	boardTree* work_root;
 	if (root == nullptr) {
 		work_root = new boardTree;
-		work_root->AI = new int[(Game.span * Game.span)];
+		work_root->AI = new int[(Game.span * Game.span)];  //Tworzymy w węźle tablicę o długości równej kwadratowi długości planszy
 		work_root->left = nullptr;
 		work_root->right = nullptr;
 		work_root->score = 0;
 		for (int i = 0; i < (Game.span * Game.span); i++) {
 			work_root->AI[i] = Game.AI[i];
 		}
-		root = work_root;
+		root = work_root;	//Jeśli korzeń drzewa nie istnieje, lub trafiliśmy do liścia, wtedy tworzymy nowy węzeł
 		return root;
 	}
 	else {
 		if (compareBoards(Game, root->AI) < 0) {
 			if (root->left == nullptr) {
-				root->left = addToTree(root->left, Game); //Dodaj w lewo
+				root->left = addToTree(root->left, Game); //Dodaj w lewo w głąb drzewa binarnego
 			}
 			else {
-				addToTree(root->left, Game); //Przejdz w lewo
+				addToTree(root->left, Game); //Przejdz w lewo w głąb drzewa binarnego
 			}
 		}
 		else if (compareBoards(Game, root->AI) > 0) {
 			if (root->right == nullptr) {
-				root->right = addToTree(root->right, Game); //Dodaj w prawo
+				root->right = addToTree(root->right, Game); //Dodaj w prawo w głąb drzewa binarnego
 			}
 			else {
-				addToTree(root->right, Game); //Przejdz w prawo
+				addToTree(root->right, Game); //Przejdz w prawo w głąb drzewa binarnego
 			}
 		}
 		else {
@@ -109,54 +107,54 @@ boardTree* addToTree(boardTree* root, Gamestate Game) {
 void deleteTree(boardTree* root) {
 	if (root != nullptr) {
 		if (root->left != nullptr)
-			deleteTree(root->left);
+			deleteTree(root->left);    //Jeśli istnieje lewy węzeł potomny, wtedy do niego przechodzimy
 		if (root->right != nullptr)
-			deleteTree(root->right);
-		delete[] root->AI;
-		delete root;
+			deleteTree(root->right);   //Jeśli istnieje prawy węzeł potomny, wtedy do niego przechodzimy
+		delete[] root->AI; 
+		delete root;   //Usuwamy zarówno tablicę AI przechowywaną w węźle, jak i sam węzeł
 		root = nullptr;
 	}
 }
 
 void writeFile(boardTree* root, int span, ofstream &fo) {
-	if (fo.is_open()) {
-		if (root == nullptr) {
+	if (fo.is_open()) {		//Sprawdzamy, czy plik otwarty
+		if (root == nullptr) {  //Sprawdzamy, czy drzewo które chcemy zapisać istnieje
 			cout << "Drzewo nie istnieje!" << endl;
 		}
 		for (int i = 0; i < 9; i++) {
 			int tab = root->AI[i];
-			fo << tab << " ";
+			fo << tab << " ";			//Zapisujemy tablicę AI do pliku
 		}
-		fo << root->score << " ";
+		fo << root->score << " ";      //Zapisujemy wartość węzła do pliku
 		if (root->left != nullptr)
-			writeFile(root->left, span, fo);
+			writeFile(root->left, span, fo);    //Jeśli istnieje lewy węzeł potomny, wtedy do niego przechodzimy
 		if (root->right != nullptr)
-			writeFile(root->right, span, fo);
+			writeFile(root->right, span, fo);   //Jeśli istnieje prawy węzeł potomny, wtedy do niego przechodzimy
 
 	}
 }
 
 boardTree* readFile(Gamestate &Game, ifstream &f) {
-	if (findRoot(Game.list_header, Game.span) == nullptr) {  
-		Game.list_header = addRoot(Game.list_header, Game.span);
-		Game.current_root = (findRoot(Game.list_header, Game.span))->root;
-		if (f.is_open()) {
+	if (findRoot(Game.list_header, Game.span) == nullptr) {  //Jeśli w liście korzenii nie istnieje węzeł o długości planszy
+		Game.list_header = addRoot(Game.list_header, Game.span);  //Tworzymy nowy węzeł listy
+		Game.current_root = (findRoot(Game.list_header, Game.span))->root; //Przypisujemy wskaźnikowi current_root wartość nullptr
+		if (f.is_open()) { //Sprawdzamy, czy plik otwarty
 			while (!f.eof()) {
 				for (int i = 0; i < (Game.span*Game.span); i++) {
 					f >> Game.AI[i];
-					if (Game.AI[i] > 1 || Game.AI[i] < -1) {
+					if (Game.AI[i] > 1 || Game.AI[i] < -1) {  //Sprawdzenie, czy wartosci w pliku sa poprawne [0,-1,1]
 						cout << "Nieprawidlowe dane w pliku" << endl;
-						return nullptr;
+						return nullptr; //Jeśli dane w pliku są nieprawidłowe, zwracamy pusty korzeń drzewa
 					}
 				}
-				if (Game.current_root == nullptr) {
-				Game.current_root =	addToTree(Game.current_root, Game);
+				if (Game.current_root == nullptr) {  //Jeśli korzeń drzewa jest pusty
+				Game.current_root =	addToTree(Game.current_root, Game); //Dodanie sczytanego węzła do drzewa jako korzeń
 				}
 				else {
-				addToTree(Game.current_root, Game);
+				addToTree(Game.current_root, Game); //Dodanie sczytanego węzła do drzewa
 				}
-				boardTree* work_node = find(Game.current_root, Game);
-				f >> work_node->score;
+				boardTree* work_node = find(Game.current_root, Game); //Zmiana węzła, na ten, który przed chwilą dodaliśmy
+				f >> work_node->score; //Dodanie węzłowi jego wartości sczytanej z pliku
 
 			}
 		}
@@ -164,23 +162,23 @@ boardTree* readFile(Gamestate &Game, ifstream &f) {
 			cout << "Nie znaleziono pliku z danymi drzewa" << endl;
 		}
 		for (int i = 0; i < (Game.span * Game.span); ++i) {
-			Game.AI[i] = 0;
+			Game.AI[i] = 0; //Czyścimy tablicę AI, aby była gotowa do rozpoczęcia gry
 		}
-		return Game.current_root;
+		return Game.current_root; //Zwracamy wskaźnik na korzeń drzewa
 	}
 	else {
-		if (f.is_open()) {
+		if (f.is_open()) { //Sprawdzamy, czy plik otwarty
 			while (!f.eof()) {
-				for (int i = 0; i < (Game.span*Game.span); i++) {
+				for (int i = 0; i < (Game.span*Game.span); i++) { 
 					f >> Game.AI[i];
-					if (Game.AI[i] > 1 || Game.AI[i] < -1) {
+					if (Game.AI[i] > 1 || Game.AI[i] < -1) {  //Sprawdzenie, czy wartosci w pliku sa poprawne [0,-1,1]
 						cout << "Nieprawidlowe dane w pliku" << endl;
-						return nullptr;
+						return nullptr; //Jeśli dane w pliku są nieprawidłowe, zwracamy pusty korzeń drzewa
 					}
 				}
-				addToTree(Game.current_root, Game);
-				boardTree* work_node = find(Game.current_root, Game);
-				f >> work_node->score;
+				addToTree(Game.current_root, Game); //Dodanie sczytanego węzła do drzewa
+				boardTree* work_node = find(Game.current_root, Game); //Zmiana węzła, na ten, który przed chwilą dodaliśmy
+				f >> work_node->score; //Dodanie węzłowi jego wartości sczytanej z pliku
 
 			}
 		}
@@ -188,23 +186,23 @@ boardTree* readFile(Gamestate &Game, ifstream &f) {
 			cout << "Nie znaleziono pliku z danymi drzewa" << endl;
 		}
 		for (int i = 0; i < (Game.span * Game.span); ++i) {
-			Game.AI[i] = 0;
+			Game.AI[i] = 0;  //Czyścimy tablicę AI, aby była gotowa do rozpoczęcia gry
 		}
-		return Game.current_root;
+		return Game.current_root; //Zwracamy wskaźnik na korzeń drzewa
 	}
 
 }
 void checkIfLoaded(Gamestate &Game) {
-	if (findRoot(Game.list_header, Game.span) == nullptr) {  
-		Game.list_header = addRoot(Game.list_header, Game.span);
-		Game.current_root = (findRoot(Game.list_header, Game.span))->root;
+	if (findRoot(Game.list_header, Game.span) == nullptr) {   //Jeśli w liście korzenii nie istnieje węzeł o długości planszy
+		Game.list_header = addRoot(Game.list_header, Game.span);  //Tworzymy nowy węzeł listy
+		Game.current_root = (findRoot(Game.list_header, Game.span))->root; //Przypisujemy wskaźnikowi current_root wartość nullptr
 		if (Game.current_root == nullptr) {
-			Game.current_root = addToTree(Game.current_root, Game);
+			Game.current_root = addToTree(Game.current_root, Game); //Tworzymy korzeń drzewa
 		}
 	}
 	else {
-		if (Game.current_root == nullptr) {
-			Game.current_root = addToTree(Game.current_root, Game);
+		if (Game.current_root == nullptr) { //Sprawdzamy, czy drzewo którego korzeń jest zapisany w węźle listy nie jest pusty
+			Game.current_root = addToTree(Game.current_root, Game); //Tworzymy korzeń drzewa
 		}
 	}
 }
@@ -334,6 +332,11 @@ void scoreUpdate(Gamestate &Game) {
 		Updated_Node = find(Game.current_root, Game);
 		Updated_Node->score += 3;
 		for (int i = 0; i < Game.Turn_Counter; i++) {
+			/*
+			W przypadku dobrego rezultatu, każdy stan planszy jaki się pojawił podczas gry ma score podwyższany o 3,
+			aby komputer wiedział na przyszłość, że do takiego stanu ma dążyć. Wyciągamy od końca odpowiednie numery
+			pól z tablicy moves, zerujemy odpowiadające im pola w tablicy AI i następnie zmieniamy score
+			*/
 			Game.AI[(Game.moves[((Game.Turn_Counter) - i) - 1]) - 1] = 0;
 			Updated_Node = find(Game.current_root, Game);
 			Updated_Node->score += 3;
@@ -342,12 +345,11 @@ void scoreUpdate(Gamestate &Game) {
 	}
 }
 int* invertAI(Gamestate Game) {
-	int* board = new int[Game.span * Game.span];
+	int* board = new int[Game.span * Game.span];  //Tworzymy tablice o odpowiedniej długości
 	for (int i = 0; i < (Game.span * Game.span); i++) {
-		board[i] = Game.AI[i] * -1;
-		cout << board[i] << " ";
+		board[i] = Game.AI[i] * -1; //Wypełniamy tablicę wartościami przeciwnymi do tych rzeczywistych
 	}
-	return board;
+	return board; //Zwracamy wskaźnik na tablice
 }
 void playerScoreUpdate(Gamestate Game, int* board) {
 	if (Game.Winner == 2) {   //Zły rezultat
@@ -373,6 +375,11 @@ void playerScoreUpdate(Gamestate Game, int* board) {
 		Updated_Node = find(Game.current_root, Game);
 		Updated_Node->score += 3;
 		for (int i = 0; i < Game.Turn_Counter; i++) {
+			/*
+			W przypadku dobrego rezultatu, każdy stan planszy jaki się pojawił podczas gry ma score podwyższany o 3,
+			aby komputer wiedział na przyszłość, że do takiego stanu ma dążyć. Wyciągamy od końca odpowiednie numery
+			pól z tablicy moves, zerujemy odpowiadające im pola w tablicy AI i następnie zmieniamy score
+			*/
 			board[(Game.moves[((Game.Turn_Counter) - i) - 1]) - 1] = 0;
 			Updated_Node = find(Game.current_root, Game);
 			Updated_Node->score += 3;
@@ -388,28 +395,28 @@ void initializeGamestate(Gamestate &Game) {
 	char znak;
 	cout << "Wybierz swoj znak [x lub o]" << endl;
 	do {
-		cin >> znak;
+		cin >> znak;  //Gracz wprowadza znak, który wybiera
 	} while (znak != cross && znak != circle);
-	Game.Player = znak;
+	Game.Player = znak; //Przypisujemu graczowi wybrany znak
 	if (Game.Player == cross) {
-		Game.CPU = circle;
+		Game.CPU = circle; //Przypisujemy komputerowi drugi znak
 	}
 	else {
-		Game.CPU = cross;
+		Game.CPU = cross; //Przypisujemy komputerowi drugi znak
 	}
 	/*
 	Utworzenie tablicy odpowiadającej bezpośrednio za wyświetlanie planszy, przechowuje ona zera w przypadku pustych pól,
 	w przypadku pól zajętych znaki odpowiadające danemu graczowi.
 	*/
-	Game.T = new char*[Game.span];
+	Game.T = new char*[Game.span]; //Tworzymy tablicę wskaźników na tablice
 	for (int i = 0; i < Game.span; ++i)
-		Game.T[i] = new char[Game.span];
-	int field_nr = '0';
+		Game.T[i] = new char[Game.span];  //Tworzymy tablicę zawierającą znaki
+	int field_nr = '0'; //Inicjujemy zmienną służącą do numerowania pól
 
 	for (int i = 0; i < Game.span; ++i) {
 		for (int j = 0; j < Game.span; ++j) {
-			field_nr++;
-			Game.T[i][j] = none;
+			field_nr++;	//Inkrementujemy zmienną numerującą pola
+			Game.T[i][j] = none; //Wpisujemy ją w odpowiednie miejsce w tablicy
 		}
 	}
 	/*
@@ -441,10 +448,10 @@ Gamestate playerTurn(Gamestate &Game) {
 			cin.getline(input, 3);
 			a = input[0] - 48;
 			b = input[1] - 48;
-			if ((b == -48) && (a > 0 && (a < 10))) {
+			if ((b == -48) && (a > 0 && (a < 10))) { //Sprawdzamy, czy gracz wprowadził liczbę jednocyfrową
 				chosen_field = a;
 			}
-			else if ((b > 0 && b < 9) && (a > 0 && a < 10)) {
+			else if ((b > 0 && b < 9) && (a > 0 && a < 10)) { //Sprawdzamy, czy gracz wprowadził liczbę dwucyfrową
 				chosen_field = (a * 10) + b;
 			}
 			delete[] input;
@@ -461,7 +468,7 @@ Gamestate playerTurn(Gamestate &Game) {
 				addToTree(Game.current_root, Game);
 			}
 			// Zapisujemy, które pole zostało wybrane w danym ruchu
-			Game.moves[Game.Turn_Counter] = chosen_field;
+			Game.moves[Game.Turn_Counter] = chosen_field; 
 			Game.Turn_Counter++;
 			break;
 		}
@@ -472,11 +479,11 @@ Gamestate playerTurn(Gamestate &Game) {
 
 Gamestate CPUTurn(Gamestate &Game) {
 	int chosen_field, i, j;
-	chosen_field = scoreCheck(Game);
-	if (chosen_field == 0) {
+	chosen_field = scoreCheck(Game); //Komputer wybiera pole, które jest najlepsze 
+	if (chosen_field == 0) { //W przypadku, gdyby funkcja scoreCheck() nie zadziałała należycie
 		do {
-			chosen_field = rand() % (Game.span*Game.span) + 1;
-			cout << "Wylosowano pole nr:" << chosen_field << endl;
+			chosen_field = rand() % (Game.span*Game.span) + 1; //Pole które wybiera komputer jest losowane
+			cout << "Wylosowano pole nr:" << chosen_field << endl; //Użytkownik jest informowany, że funkcja scoreCheck() nie zadziałała należycie
 			i = (chosen_field - 1) / Game.span;
 			j = (chosen_field + (Game.span - 1)) % Game.span;
 			if (Game.T[i][j] == none) {
@@ -497,7 +504,7 @@ Gamestate CPUTurn(Gamestate &Game) {
 		//Jeżeli dana plansza pojawiła się po raz pierwszy i nie ma jej w drzewie, dodajemy ją do drzewa
 		addToTree(Game.current_root, Game);
 	}
-	Game.moves[Game.Turn_Counter] = chosen_field;
+	Game.moves[Game.Turn_Counter] = chosen_field; //Zapisujemy, jakie pole zostało wybrane do tablicy moves
 	Game.Turn_Counter++;
 	return Game;
 }
@@ -507,22 +514,22 @@ bool checkForWin(Gamestate &Game) {
 	for (int i = 0; i < Game.span; i++) {
 		for (int j = 1; j < Game.span; j++) {
 			if (Game.T[i][j] == none) {
-				break;
+				break; //Jeśli rozpatrywane pole puste, kończymy rozpatrywać daną linie
 			}
 			else if (Game.T[i][j] != Game.T[i][j - 1]) {
-				break;
+				break; //Jeśli rozpatrywane pole różne od poprzedniego, kończymy rozpatrywać daną linie
 			}
 			else if ((j == (Game.span - 1) && (Game.T[i][j] == Game.T[i][j - 1]))) {
 				//Sprawdzenie, czy gra zakończyła się, ponieważ któryś z graczy ułożył x znaków w linii poziomej
 				Win = true;
 				if (Game.T[i][j] == Game.Player) {
-					Game.Player_Wins++;
-					Game.Winner = 1;
+					Game.Player_Wins++; //Inkrementacja licznika zwycięstw gracza
+					Game.Winner = 1; //Ustawienie kodu zwycięstwa gracza
 					cout << "Gracz wygrywa!" << endl;
 				}
 				if (Game.T[i][j] == Game.CPU) {
-					Game.CPU_Wins++;
-					Game.Winner = 2;
+					Game.CPU_Wins++; //Inkrementacja licznika zwycięstw momputera
+					Game.Winner = 2; //Ustawienie kodu zwycięstwa komputera
 					cout << "Komputer wygrywa!" << endl;
 				}
 			}
@@ -530,11 +537,11 @@ bool checkForWin(Gamestate &Game) {
 	}
 	for (int i = 0; i < Game.span; i++) {
 		for (int j = 1; j < Game.span; j++) {
-			if (Game.T[j][i] == none) {
+			if (Game.T[j][i] == none) { //Jeśli rozpatrywane pole puste, kończymy rozpatrywać daną linie
 				break;
 			}
 			else if (Game.T[j][i] != Game.T[j - 1][i]) {
-				break;
+				break; //Jeśli rozpatrywane pole różne od poprzedniego, kończymy rozpatrywać daną linie
 			}
 			else if ((j == (Game.span - 1) && (Game.T[j][i] == Game.T[j - 1][i]))) {
 				//Sprawdzenie, czy gra zakończyła się, ponieważ któryś z graczy ułożył x znaków w linii pionowej
@@ -553,10 +560,10 @@ bool checkForWin(Gamestate &Game) {
 		}
 	}
 	for (int i = 1; i < Game.span; i++) {
-		if (Game.T[i][i] == none) {
+		if (Game.T[i][i] == none) { //Jeśli rozpatrywane pole puste, kończymy rozpatrywać daną linie
 			break;
 		}
-		else if (Game.T[i][i] != Game.T[i - 1][i - 1]) {
+		else if (Game.T[i][i] != Game.T[i - 1][i - 1]) { //Jeśli rozpatrywane pole różne od poprzedniego, kończymy rozpatrywać daną linie
 			break;
 		}
 		else if ((i == (Game.span - 1) && (Game.T[i][i] == Game.T[i - 1][i - 1]))) {
@@ -578,10 +585,10 @@ bool checkForWin(Gamestate &Game) {
 		}
 	}
 	for (int i = 1; i < Game.span; i++) {
-		if (Game.T[i][(Game.span - 1) - i] == none) {
+		if (Game.T[i][(Game.span - 1) - i] == none) { //Jeśli rozpatrywane pole puste, kończymy rozpatrywać daną linie
 			break;
 		}
-		else if (Game.T[i][(Game.span - 1) - i] != Game.T[i - 1][(Game.span) - i]) {
+		else if (Game.T[i][(Game.span - 1) - i] != Game.T[i - 1][(Game.span) - i]) { //Jeśli rozpatrywane pole różne od poprzedniego, kończymy rozpatrywać daną linie
 			break;
 		}
 		else if ((i == (Game.span - 1) && (Game.T[i][(Game.span - 1) - i] == Game.T[i - 1][Game.span - i]))) {
@@ -624,9 +631,9 @@ void checkForEnd(Gamestate &Game) {
 int convertParam(char* input) {
 	int param;
 	char * p;
-	param = strtol(input, &p, 10);
+	param = strtol(input, &p, 10); //Konwersja parametru wprowadzonego z linii komend na liczbe, input to tablica zawierająca parametr, a p to znak kończący tablice
 	if (*p != 0) {
-		cout << "Parametr zawiera litery";
+		cout << "Parametr zawiera litery"; //Jeśli parametr zawiera litery, to jest nieodpowiedni
 		return 0;
 	}
 	else {
@@ -638,11 +645,11 @@ void drawBoard(Gamestate &Game) {
 	if (Game.initialized == false) {
 		initializeGamestate(Game);
 	}
-	cout << (char)(upper_left); //╔
+	cout << (char)(intersection);
 	for (int i = 0; i < (Game.span - 1); ++i) {
-		cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(t_down); //═══╦ * span
+		cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(intersection);
 	}
-	cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(upper_right); // ═══╗
+	cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(intersection);
 	cout << endl;
 	for (int i = 0; i < Game.span; ++i) {
 		cout << (char)(vertical);
@@ -667,58 +674,58 @@ void drawBoard(Gamestate &Game) {
 		}
 		cout << endl;
 		if (i != (Game.span - 1)) {
-			cout << (char)(t_right);
+			cout << (char)(intersection);
 			for (int j = 0; j < (Game.span - 1); j++) {
 				cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(intersection);
 			}
-			cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(t_left);
+			cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(intersection);
 			cout << endl;
 		}
 	}
-	cout << (char)(lower_left);
+	cout << (char)(intersection);
 	for (int i = 0; i < (Game.span - 1); ++i) {
-		cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(t_up);
+		cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(intersection);
 	}
-	cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(lower_right) << endl;
+	cout << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(horizontal) << (char)(intersection) << endl;
 }
 Gamestate singleGame(Gamestate &Game) {
-	drawBoard(Game);
+	drawBoard(Game); //Rysuje plansze po raz pierwszy
 	ifstream fi;
-	fi.open(to_string(Game.span));
-	Game.current_root = readFile(Game, fi);
-	checkIfLoaded(Game);
-	Game.Who_First = rand() % 2;
-	if (Game.Who_First == 0) {
+	fi.open(to_string(Game.span)); //Otwieram plik o nazwie równej długośći planszy
+	Game.current_root = readFile(Game, fi); //Sczytuje informacje o drzewie z pliku
+	checkIfLoaded(Game); //Sprawdzam, czy drzewo zostało wczytane
+	Game.Who_First = rand() % 2; //Losuje, kto powinien być pierwszy
+	if (Game.Who_First == 0) { //Jeśli gracz rozpoczyna rozgrywkę
 		cout << "Gre rozpoczyna Gracz" << endl;
 		do {
-			playerTurn(Game);
-			drawBoard(Game);
-			checkForEnd(Game);
-			if (Game.Winner != 0) {
+			playerTurn(Game); //Tura gracza
+			drawBoard(Game); //Rysuję planszę po turze gracza
+			checkForEnd(Game); //Sprawdzam, czy rozgrywka powinna być zakończona
+			if (Game.Winner != 0) { //Jeśli powinna
 				ofstream fo;
-				fo.open(to_string(Game.span));
-				writeFile(Game.current_root, Game.span, fo);
-				playerScoreUpdate(Game, invertAI(Game));
-				scoreUpdate(Game);
-				Game.initialized = false;
+				fo.open(to_string(Game.span)); //Otwieram plik o nazwie równej długości planszy
+				writeFile(Game.current_root, Game.span, fo); //Zapisuje drzewo binarne do pliku
+				playerScoreUpdate(Game, invertAI(Game)); //Uczę komputer wykorzystując ruchy gracza
+				scoreUpdate(Game); //Uczę komputer wykorzystując jego własne ruchy
+				Game.initialized = false; //Zaznaczam, że gra się skończyła
 				break;
 			}
-			CPUTurn(Game);
-			drawBoard(Game);
-			checkForEnd(Game);
-			if (Game.Winner != 0) {
+			CPUTurn(Game); //Tura komputera
+			drawBoard(Game); //Rysuję planszę po turze komputera
+			checkForEnd(Game); //Sprawdzam, czy rozgrywka powinna być zakończona
+			if (Game.Winner != 0) { //Jeśli powinna
 				ofstream fo;
-				fo.open(to_string(Game.span));
-				writeFile(Game.current_root, Game.span, fo);
-				playerScoreUpdate(Game, invertAI(Game));
-				scoreUpdate(Game);
-				Game.initialized = false;
+				fo.open(to_string(Game.span)); //Otwieram plik o nazwie równej długości planszy
+				writeFile(Game.current_root, Game.span, fo); //Zapisuje drzewo binarne do pliku
+				playerScoreUpdate(Game, invertAI(Game)); //Uczę komputer wykorzystując ruchy gracza
+				scoreUpdate(Game); //Uczę komputer wykorzystując jego własne ruchy
+				Game.initialized = false; // Zaznaczam, że gra się skończyła
 				break;
 			}
-		} while (true);
+		} while (true); //Ruchy gracza i komputera powtarzają się w pętli, póki nie wyczerpią wszystkich ruchów lub któryś z nich nie wygra
 		return Game;
 	}
-	else {
+	else { //Jeśli komputer rozpoczyna rozgrywkę, odbywa się ona analogicznie do tego, gdy rozpoczyna gracz
 		cout << "Gre rozpoczyna Komputer" << endl;
 		do {
 			CPUTurn(Game);
@@ -754,7 +761,7 @@ void sessionSummary(Gamestate &Game) {
 	cout << "Gracz wygral " << Game.Player_Wins << " razy" << endl;
 	cout << "Komputer wygral " << Game.CPU_Wins << " razy" << endl;
 	for (int i = 0; i < Game.span; i++) {
-		cout << "Usuwam tablice zawierajaca planszy" << endl;
+		cout << "Usuwam tablice zawierajaca pola planszy" << endl;
 		delete[] Game.T[i];
 	}
 	cout << "Usuwam tablice wskaznikow na tablice pol planszy" << endl;
